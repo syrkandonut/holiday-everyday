@@ -1,0 +1,8 @@
+env
+.env
+.venv
+test.env
+__pycache__
+.vscode
+.ruff_cache
+.mypy_cache
