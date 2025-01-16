@@ -1,4 +1,4 @@
-from django.db.models import CASCADE, ForeignKey, TextField
+from django.db.models import TextField
 
 from .base import Base
 

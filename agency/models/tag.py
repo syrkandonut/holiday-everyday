@@ -14,4 +14,4 @@ class Tag(Base):
         verbose_name_plural = "Тэги"
 
     def __str__(self):
-        return f"Тэг #{self.name}"
+        return f"#{self.name}"
