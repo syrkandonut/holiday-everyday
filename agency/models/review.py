@@ -1,10 +1,17 @@
-from django.db.models import TextField
+from django.db.models import CASCADE, ForeignKey, TextField
 
 from .base import Base
+from .project import Project
 
 
 class Review(Base):
     text: TextField = TextField(verbose_name="Текст отзыва")
+    project: ForeignKey = ForeignKey(
+        Project,
+        related_name="review",
+        on_delete=CASCADE,
+        verbose_name="Проект",
+    )
 
     class Meta:
         db_table = "reviews"
