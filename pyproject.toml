@@ -7,6 +7,11 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.12"
+django = "^5.1.5"
+black = "^24.10.0"
+ruff = "^0.9.1"
+mypy = "^1.14.1"
+django-stubs = "^5.1.2"
 
 [tool.ruff.lint]
 # Enable pycodestyle (`E`) and Pyflakes (`F`) codes by default.
@@ -43,12 +48,12 @@ extend-exclude = '''
 
 [tool.mypy]
 python_version = "3.12"
-plugins = ["pydantic.mypy"]
 warn_unused_configs = true
 warn_unused_ignores = true
 warn_redundant_casts = true
 warn_return_any = true
 warn_unreachable = true
+
 
 [build-system]
 requires = ["poetry-core"]

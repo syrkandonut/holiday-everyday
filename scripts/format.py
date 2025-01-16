@@ -6,7 +6,8 @@ from black import main as black
 from ruff.__main__ import find_ruff_bin
 
 
-CHECK_FOLDERS = ("app",)
+CHECK_FOLDERS = ("agency","config")
+
 
 def main() -> None:
     ruff = find_ruff_bin()
