@@ -9,13 +9,16 @@ class Media(Base):
     title: CharField = CharField(max_length=256, verbose_name="Заголовок")
     media: CharField = CharField(max_length=256, verbose_name="Название источника")
     media_link: CharField = CharField(
-        max_length=256, verbose_name="Ссылка на сайт источника"
+        max_length=256,
+        verbose_name="Ссылка на сайт источника",
     )
     preview_image: CharField = CharField(
-        max_length=512, verbose_name="Ссылка на картинку для отображения"
+        max_length=512,
+        verbose_name="Ссылка на картинку для отображения",
     )
     preview_link: CharField = CharField(
-        max_length=512, verbose_name="Ссылка на сайт для вставки"
+        max_length=512,
+        verbose_name="Ссылка на сайт для вставки",
     )
 
     class Meta:

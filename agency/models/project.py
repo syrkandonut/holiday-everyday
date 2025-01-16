@@ -1,13 +1,10 @@
 from django.db.models import (
-    CASCADE,
     CharField,
     ManyToManyField,
-    OneToOneField,
     TextField,
 )
 
 from .base import Base
-from .review import Review
 from .tag import Tag
 
 PROJECT_TYPES = (
@@ -23,21 +20,26 @@ class Project(Base):
     descritpion: CharField = CharField(max_length=512, verbose_name="Описание проекта")
     customer: CharField = CharField(max_length=64, verbose_name="Заказчик проекта")
     place: CharField = CharField(
-        max_length=64, verbose_name="Площадка проведения проекта"
+        max_length=64,
+        verbose_name="Площадка проведения проекта",
     )
     photographer: CharField = CharField(max_length=64, verbose_name="Фотограф")
     video_url: CharField = CharField(
-        max_length=512, verbose_name="Ссылка на видео проекта"
+        max_length=512,
+        verbose_name="Ссылка на видео проекта",
     )
-    full_description: TextField = TextField(verbose_name="Полное описание проекта")
+    full_description: TextField = TextField(
+        verbose_name="Полное описание проекта",
+    )
     type: CharField = CharField(
-        choices=PROJECT_TYPES, max_length=64, verbose_name="Тип проекта"
+        choices=PROJECT_TYPES,
+        max_length=64,
+        verbose_name="Тип проекта",
     )
     tags: ManyToManyField = ManyToManyField(
-        Tag, related_name="projects", verbose_name="Тэги проекта"
-    )
-    review: OneToOneField = OneToOneField(
-        Review, on_delete=CASCADE, verbose_name="Отзыв проекта"
+        Tag,
+        related_name="projects",
+        verbose_name="Тэги проекта",
     )
 
     class Meta:
