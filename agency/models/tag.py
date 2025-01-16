@@ -6,7 +6,12 @@ from .base import Base
 
 
 class Tag(Base):
-    name: CharField = CharField(max_length=64)
+    name: CharField = CharField(max_length=64, verbose_name="Название тэга")
 
     class Meta:
         db_table = "tags"
+        verbose_name = "Тэг"
+        verbose_name_plural = "Тэги"
+
+    def __str__(self):
+        return f"Тэг #{self.name}"
