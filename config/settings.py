@@ -78,7 +78,7 @@ WSGI_APPLICATION = "config.wsgi.application"
 DB_PATH = "data"
 
 if not os.path.isdir(BASE_DIR / DB_PATH):
-    raise NotImplementedError
+    os.mkdir(BASE_DIR / DB_PATH)
 
 DATABASES = {
     "default": {
