@@ -3,6 +3,8 @@ from rest_framework.utils.serializer_helpers import ReturnDict
 
 from agency.models import Project
 
+from .image import ImageSerializer
+from .review import ReviewSerializer
 from .tag import TagSerializer
 
 
@@ -10,8 +12,20 @@ class ProjectSerializer(ModelSerializer):
     tags = SerializerMethodField()
 
     def get_tags(self, obj: Project) -> ReturnDict:
-        selected_tags = obj.tags.all()
-        return TagSerializer(selected_tags, many=True).data
+        project_tags = obj.tags.all()
+        return TagSerializer(project_tags, many=True).data
+
+    images = SerializerMethodField()
+
+    def get_images(self, obj: Project) -> ReturnDict:
+        project_images = obj.images.all()
+        return ImageSerializer(project_images, many=True).data
+
+    review = SerializerMethodField()
+
+    def get_review(self, obj: Project) -> ReturnDict:
+        project_review = obj.review.all()
+        return ReviewSerializer(project_review, many=True).data
 
     class Meta:
         model = Project
@@ -26,4 +40,6 @@ class ProjectSerializer(ModelSerializer):
             "full_description",
             "type",
             "tags",
+            "images",
+            "review",
         ]

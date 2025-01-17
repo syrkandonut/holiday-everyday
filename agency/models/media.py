@@ -1,5 +1,6 @@
 from django.db.models import (
     CharField,
+    DateTimeField,
 )
 
 from .base import Base
@@ -12,6 +13,7 @@ class Media(Base):
         max_length=256,
         verbose_name="Ссылка на сайт источника",
     )
+    media_data: DateTimeField = DateTimeField(verbose_name="Дата и время публикации")
     preview_image: CharField = CharField(
         max_length=512,
         verbose_name="Ссылка на картинку для отображения",

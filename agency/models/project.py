@@ -1,10 +1,13 @@
 from django.db.models import (
     CharField,
     ManyToManyField,
+    QuerySet,
     TextField,
 )
 
 from .base import Base
+from .image import Image
+from .review import Review
 from .tag import Tag
 
 PROJECT_TYPES = (
@@ -35,12 +38,16 @@ class Project(Base):
         choices=PROJECT_TYPES,
         max_length=64,
         verbose_name="Тип проекта",
+        default=PROJECT_TYPES[0][0],
     )
     tags: ManyToManyField = ManyToManyField(
         Tag,
         related_name="projects",
         verbose_name="Тэги проекта",
     )
+
+    images = QuerySet[Image]
+    review = QuerySet[Review]
 
     class Meta:
         db_table = "projects"

@@ -1,16 +1,16 @@
-from django.db.models import CASCADE, ForeignKey, TextField
+from django.db.models import CASCADE, OneToOneField, TextField
 
 from .base import Base
-from .project import Project
 
 
 class Review(Base):
     text: TextField = TextField(verbose_name="Текст отзыва")
-    project: ForeignKey = ForeignKey(
-        Project,
+    project: OneToOneField = OneToOneField(
+        "agency.Project",
         related_name="review",
         on_delete=CASCADE,
         verbose_name="Проект",
+        unique=True,
     )
 
     class Meta:
@@ -19,4 +19,4 @@ class Review(Base):
         verbose_name_plural = "Отзывы"
 
     def __str__(self):
-        return "Отзыв проекта"
+        return f"Отзыв проекта {self.project}"
