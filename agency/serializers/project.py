@@ -1,3 +1,4 @@
+from django.core.exceptions import ObjectDoesNotExist
 from rest_framework.serializers import ModelSerializer, SerializerMethodField
 from rest_framework.utils.serializer_helpers import ReturnDict
 
@@ -15,17 +16,18 @@ class ProjectSerializer(ModelSerializer):
         project_tags = obj.tags.all()
         return TagSerializer(project_tags, many=True).data
 
-    images = SerializerMethodField()
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        try:
+            project_review = instance.review
+            data["review"] = ReviewSerializer(project_review).data
+        except ObjectDoesNotExist:
+            pass
 
-    def get_images(self, obj: Project) -> ReturnDict:
-        project_images = obj.images.all()
-        return ImageSerializer(project_images, many=True).data
-
-    review = SerializerMethodField()
-
-    def get_review(self, obj: Project) -> ReturnDict:
-        project_review = obj.review.all()
-        return ReviewSerializer(project_review, many=True).data
+        project_images = instance.images.all()
+        if project_images:
+            data["images"] = ImageSerializer(project_images, many=True).data
+        return data
 
     class Meta:
         model = Project
@@ -40,6 +42,6 @@ class ProjectSerializer(ModelSerializer):
             "full_description",
             "type",
             "tags",
-            "images",
-            "review",
+            # "images",
+            # "review",
         ]
