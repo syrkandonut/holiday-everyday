@@ -3,23 +3,15 @@ from django.db.models import (
     ForeignKey,
     ImageField,
 )
-from django.core.exceptions import ValidationError
-from django.utils.translation import gettext_lazy as _
+
 from .base import Base
 
-def validator(value: str):
-    if Image.objects.filter(name=value).exists():
-        raise ValidationError(
-            _("%(value)s Уже существует"),
-            params={"value": value},
-        )
-    
+
 class Image(Base):
     name: ImageField = ImageField(
         upload_to="data/images",
         verbose_name="Изображение",
         unique=True,
-        validators=[validator]
     )
 
     project: ForeignKey = ForeignKey(
@@ -28,11 +20,6 @@ class Image(Base):
         on_delete=CASCADE,
         verbose_name="Проект",
     )
-
-    def save(self, *args, **kwargs):
-        if self.name:
-            self.name = str(self.name)
-            super().save(*args, **kwargs)
 
     class Meta:
         db_table = "images"
