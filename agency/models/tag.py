@@ -19,7 +19,10 @@ TAGS = (
 
 class Tag(Base):
     name: CharField = CharField(
-        max_length=64, choices=TAGS, verbose_name="Название тэга"
+        max_length=64,
+        choices=TAGS,
+        verbose_name="Название тэга",
+        unique=True,
     )
 
     class Meta:
