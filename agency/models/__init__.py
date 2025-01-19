@@ -1,4 +1,3 @@
-from .feedback import Feedback
 from .image import Image
 from .media import Media
 from .project import Project

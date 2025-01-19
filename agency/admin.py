@@ -3,7 +3,7 @@ from django.contrib import admin
 from django.db.models import ManyToManyField
 from django.forms import CheckboxSelectMultiple
 
-from .models import Feedback, Image, Media, Project, Review, Tag
+from .models import Image, Media, Project, Review, Tag
 
 
 class MultipleFileInput(forms.ClearableFileInput):
@@ -53,12 +53,6 @@ class ReviewInLine(admin.TabularInline):
     model = Review
 
 
-class MultiplieImageInLine(admin.TabularInline):
-    model = Image
-    form = MultipleFileForm
-    fields = ["images"]
-
-
 @admin.register(Project)
 class ProjectAdmin(admin.ModelAdmin):
     inlines = [ImageInLine, ReviewInLine]
@@ -73,8 +67,12 @@ class ProjectAdmin(admin.ModelAdmin):
         project = form.instance
 
         if request.FILES.getlist("images"):
+            image_exists = list(
+                Image.objects.filter(project=project).values_list("name", flat=True)
+            )
             for image in request.FILES.getlist("images"):
-                Image.objects.create(project=project, name=image)
+                if str(image) not in image_exists:
+                    Image.objects.create(project=project, name=image)
 
 
 @admin.register(Tag)
@@ -85,4 +83,4 @@ class TagAdmin(admin.ModelAdmin):
         return "project" not in request.path
 
 
-admin.site.register((Review, Feedback, Media, Image))
+admin.site.register((Review, Media, Image))
