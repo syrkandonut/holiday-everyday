@@ -1,8 +1,15 @@
-from django.db.models import AutoField, Model
+from uuid import uuid4
+
+from django.db.models import Model, UUIDField
 
 
 class Base(Model):
-    id: AutoField = AutoField(primary_key=True)
+    id: UUIDField = UUIDField(
+        primary_key=True,
+        default=uuid4,
+        editable=False,
+        unique=True,
+    )
 
     class Meta:
         abstract = True

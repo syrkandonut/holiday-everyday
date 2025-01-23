@@ -72,7 +72,7 @@ class ProjectAdmin(admin.ModelAdmin):
             # )
             for image in request.FILES.getlist("images"):
                 # if str(image) not in image_exists:
-                    Image.objects.create(project=project, name=image)
+                Image.objects.create(project=project, name=image)
 
 
 @admin.register(Tag)
