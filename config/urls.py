@@ -15,10 +15,13 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
+
+from config import settings
 
 urlpatterns = [
     path("api/admin/", admin.site.urls),
     path("api/", include("agency.urls")),
-]
+] + static(settings.IMAGE_URL, document_root=settings.IMAGE_ROOT)
