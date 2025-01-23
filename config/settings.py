@@ -13,6 +13,10 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 import os
 from pathlib import Path
 
+from dotenv import load_dotenv
+
+load_dotenv()
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -21,10 +25,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-@5klwloubn6ecfqa^-a00xm-nd5xsf^gj5=w29_c$2xq*d*so%"
+SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv("DEBUG")
 
 ALLOWED_HOSTS: list[str] = []
 
@@ -82,22 +86,25 @@ TEMPLATES = [
         },
     },
 ]
-CSRF_TRUSTED_ORIGINS = ["https://*.mydomain.com"]
+CSRF_TRUSTED_ORIGINS = [
+    "https://*.mydomain.com",
+    "http://localhost:8000",
+    "http://localhost:1234",
+]
 WSGI_APPLICATION = "config.wsgi.application"
 
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-DB_PATH = "data"
+STORAGE_DB_PATH = "storage/database"
 
-if not os.path.isdir(BASE_DIR / DB_PATH):
-    os.mkdir(BASE_DIR / DB_PATH)
+os.makedirs(BASE_DIR / STORAGE_DB_PATH, exist_ok=True)
 
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / DB_PATH / "db.sqlite3",
+        "NAME": BASE_DIR / STORAGE_DB_PATH / "db.sqlite3",
     }
 }
 
@@ -139,10 +146,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = "/static/"
-STATIC_ROOT = os.path.join(BASE_DIR, "static")
+STATIC_PATH = "static"
+STATIC_ROOT = os.path.join(BASE_DIR, STATIC_PATH)
 
-IMAGE_URL = "/media/"
-IMAGE_ROOT = os.path.join(BASE_DIR, "data/images")
+IMAGE_URL = "/image/"
+IMAGE_PATH = "storage/images"
+IMAGE_ROOT = os.path.join(BASE_DIR, IMAGE_PATH)
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
