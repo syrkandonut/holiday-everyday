@@ -1,7 +1,9 @@
 from django.db.models import (
     CharField,
+    ImageField,
     ManyToManyField,
     TextField,
+    URLField,
 )
 
 from .base import Base
@@ -15,7 +17,11 @@ PROJECT_TYPES = (
 
 
 class Project(Base):
-    preview_image: CharField = CharField(max_length=512, verbose_name="Превью проекта")
+    preview_image: ImageField = ImageField(
+        upload_to="data/images",
+        verbose_name="Превью проекта",
+        unique=True,
+    )
     title: CharField = CharField(max_length=256, verbose_name="Заголовок проекта")
     descritpion: CharField = CharField(max_length=512, verbose_name="Описание проекта")
     customer: CharField = CharField(max_length=64, verbose_name="Заказчик проекта")
@@ -24,7 +30,7 @@ class Project(Base):
         verbose_name="Площадка проведения проекта",
     )
     photographer: CharField = CharField(max_length=64, verbose_name="Фотограф")
-    video_url: CharField = CharField(
+    video_url: URLField = URLField(
         max_length=512,
         verbose_name="Ссылка на видео проекта",
     )
