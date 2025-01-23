@@ -67,12 +67,12 @@ class ProjectAdmin(admin.ModelAdmin):
         project = form.instance
 
         if request.FILES.getlist("images"):
-            # image_exists = list(
-            #     Image.objects.filter(project=project).values_list("name", flat=True)
-            # )
+            image_exists = list(
+                Image.objects.filter(project=project).values_list("name", flat=True)
+            )
             for image in request.FILES.getlist("images"):
-                # if str(image) not in image_exists:
-                Image.objects.create(project=project, name=image)
+                if str(image) not in image_exists:
+                    Image.objects.create(project=project, name=image)
 
 
 @admin.register(Tag)
