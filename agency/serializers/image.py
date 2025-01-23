@@ -10,7 +10,5 @@ class ImageSerializer(ModelSerializer):
 
     def to_representation(self, instance):
         data = super().to_representation(instance)
-        data["name"] = "http://localhost:1234/media/" + str(data["name"]).lstrip(
-            "data/images/"
-        )
+        data["name"] = "http://localhost:1234/media/" + str(data["name"])[13:]
         return data

@@ -10,10 +10,14 @@ from .review import ReviewSerializer
 from .tag import ProjectTagSerializer
 
 
-class ProjectSerializer(ModelSerializer):
+class ProjectOneSerializer(ModelSerializer):
 
     def to_representation(self, instance: Project):
         data = super().to_representation(instance)
+
+        data["preview_image"] = (
+            "http://localhost:1234/media/" + str(instance.preview_image)[12:]
+        )
 
         try:
             project_review = Review.objects.get(project=instance)
@@ -51,6 +55,39 @@ class ProjectSerializer(ModelSerializer):
             "full_description",
             "type",
             "tags",
-            # "images",
-            # "review",
+        ]
+
+
+class ProjectSerializer(ModelSerializer):
+    def to_representation(self, instance: Project):
+        data = super().to_representation(instance)
+
+        data["preview_image"] = (
+            "http://localhost:1234/media/" + str(instance.preview_image)[12:]
+        )
+
+        try:
+            project_review = Review.objects.get(project=instance)
+            serialized_review = ReviewSerializer(project_review).data
+            data["review"] = serialized_review
+        except ObjectDoesNotExist:
+            ...
+
+        project_tags = instance.tags.all()
+        if project_tags:
+            data["tags"] = [
+                tag["id"] for tag in ProjectTagSerializer(project_tags, many=True).data
+            ]
+
+        return data
+
+    class Meta:
+        model = Project
+        fields: list[str] = [
+            "id",
+            "preview_image",
+            "title",
+            "customer",
+            "type",
+            "tags",
         ]
