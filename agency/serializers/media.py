@@ -1,7 +1,7 @@
 from rest_framework.serializers import ModelSerializer
 
 from agency.models import Media
-from config.settings import IMAGE_URL, SERVER_NGINX_URI, STORAGE_IMAGE_PATH
+from config.settings import IMAGE_URL, SERVER_NGINX_URI, SERVER_URI, STORAGE_IMAGE_PATH
 
 
 class MediaSerializer(ModelSerializer):
@@ -11,11 +11,21 @@ class MediaSerializer(ModelSerializer):
 
     def to_representation(self, instance):
         data = super().to_representation(instance)
+
         data["preview_image"] = (
             SERVER_NGINX_URI
             + IMAGE_URL
-            + str(data["preview_image"]).replace("/" + STORAGE_IMAGE_PATH + "/", str())
+            + str(data["preview_image"])
+            .replace("/" + STORAGE_IMAGE_PATH + "/", str())
+            .replace(SERVER_URI, str())
         )
-  
+
+        data["screenshot"] = (
+            SERVER_NGINX_URI
+            + IMAGE_URL
+            + str(data["screenshot"])
+            .replace("/" + STORAGE_IMAGE_PATH + "/", str())
+            .replace(SERVER_URI, str())
+        )
 
         return data
