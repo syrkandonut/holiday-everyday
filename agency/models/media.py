@@ -1,8 +1,8 @@
 from django.db.models import (
     CharField,
     DateField,
-    URLField,
     ImageField,
+    URLField,
 )
 
 from config.settings import STORAGE_IMAGE_PATH
@@ -23,7 +23,7 @@ class Media(Base):
         max_length=512,
         verbose_name="Картинка СМИ",
     )
-    screenshot: ImageField =ImageField(
+    screenshot: ImageField = ImageField(
         upload_to=STORAGE_IMAGE_PATH,
         max_length=512,
         verbose_name="Скриншот статьи",
