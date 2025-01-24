@@ -1,26 +1,32 @@
 from django.db.models import (
     CharField,
-    DateTimeField,
+    DateField,
+    URLField,
+    ImageField,
 )
+
+from config.settings import STORAGE_IMAGE_PATH
 
 from .base import Base
 
 
 class Media(Base):
-    title: CharField = CharField(max_length=256, verbose_name="Заголовок")
-    media: CharField = CharField(max_length=256, verbose_name="Название источника")
-    media_link: CharField = CharField(
-        max_length=256,
-        verbose_name="Ссылка на сайт источника",
-    )
-    media_data: DateTimeField = DateTimeField(verbose_name="Дата и время публикации")
-    preview_image: CharField = CharField(
+    title: CharField = CharField(max_length=256, verbose_name="Заголовок статьи")
+    name: CharField = CharField(max_length=256, verbose_name="Название СМИ")
+    link: URLField = URLField(
         max_length=512,
-        verbose_name="Ссылка на картинку для отображения",
+        verbose_name="Ссылка на статью",
     )
-    preview_link: CharField = CharField(
+    date: DateField = DateField(verbose_name="Дата публикации статьи")
+    preview_image: ImageField = ImageField(
+        upload_to=STORAGE_IMAGE_PATH,
         max_length=512,
-        verbose_name="Ссылка на сайт для вставки",
+        verbose_name="Картинка СМИ",
+    )
+    screenshot: ImageField =ImageField(
+        upload_to=STORAGE_IMAGE_PATH,
+        max_length=512,
+        verbose_name="Скриншот статьи",
     )
 
     class Meta:
@@ -29,4 +35,4 @@ class Media(Base):
         verbose_name_plural = "СМИ"
 
     def __str__(self):
-        return f"СМИ {self.media}"
+        return f"СМИ {self.name}"
