@@ -6,6 +6,8 @@ from django.db.models import (
     URLField,
 )
 
+from config.settings import STORAGE_IMAGE_PATH
+
 from .base import Base
 from .tag import Tag
 
@@ -18,12 +20,12 @@ PROJECT_TYPES = (
 
 class Project(Base):
     preview_image: ImageField = ImageField(
-        upload_to="data/images",
+        upload_to=STORAGE_IMAGE_PATH,
         verbose_name="Превью проекта",
-        unique=True,
+        max_length=512,
     )
     title: CharField = CharField(max_length=256, verbose_name="Заголовок проекта")
-    descritpion: CharField = CharField(max_length=512, verbose_name="Описание проекта")
+    description: CharField = CharField(max_length=512, verbose_name="Описание проекта")
     customer: CharField = CharField(max_length=64, verbose_name="Заказчик проекта")
     place: CharField = CharField(
         max_length=64,

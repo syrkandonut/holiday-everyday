@@ -4,12 +4,14 @@ from django.db.models import (
     ImageField,
 )
 
+from config.settings import STORAGE_IMAGE_PATH
+
 from .base import Base
 
 
 class Image(Base):
     name: ImageField = ImageField(
-        upload_to="data/images",
+        upload_to=STORAGE_IMAGE_PATH,
         verbose_name="Изображение",
         unique=True,
     )

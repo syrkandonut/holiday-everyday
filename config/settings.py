@@ -17,6 +17,8 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+SERVER_NGINX_URI = os.getenv("SERVER_NGINX_URI")
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -150,8 +152,8 @@ STATIC_PATH = "static"
 STATIC_ROOT = os.path.join(BASE_DIR, STATIC_PATH)
 
 IMAGE_URL = "/image/"
-IMAGE_PATH = "storage/images"
-IMAGE_ROOT = os.path.join(BASE_DIR, IMAGE_PATH)
+STORAGE_IMAGE_PATH = "storage/images"
+IMAGE_ROOT = os.path.join(BASE_DIR, STORAGE_IMAGE_PATH)
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
