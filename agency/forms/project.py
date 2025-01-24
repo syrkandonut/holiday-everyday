@@ -17,7 +17,7 @@ class ProjectMultipleFileForm(ModelForm):
             "customer",
             "place",
             "photographer",
-            "video_url",
+            "video",
             "full_description",
             "type",
             "tags",
