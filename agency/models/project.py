@@ -1,4 +1,5 @@
 from django.db.models import (
+    BooleanField,
     CharField,
     ImageField,
     ManyToManyField,
@@ -50,6 +51,8 @@ class Project(Base):
         related_name="projects",
         verbose_name="Тэги проекта",
     )
+
+    published: BooleanField = BooleanField(verbose_name="Опубликовано", default=False)
 
     class Meta:
         db_table = "projects"

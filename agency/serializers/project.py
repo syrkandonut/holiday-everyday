@@ -64,6 +64,7 @@ class ProjectOneSerializer(ProjectCommonSerializer):
             "full_description",
             "type",
             "tags",
+            "published",
         ]
 
 
