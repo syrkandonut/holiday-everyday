@@ -12,8 +12,8 @@ class ReviewSerializer(ModelSerializer):
 
     text = SerializerMethodField()
 
-    def convert_text(self, text) -> str:
+    def convert_to_nbsp(self, text) -> str:
         return re.sub(r"(\b\w{1,3}\b)\s", r"\1&nbsp;", text)
 
     def get_text(self, obj: Review):
-        return self.convert_text(obj.text)
+        return self.convert_to_nbsp(obj.text)
