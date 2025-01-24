@@ -1,0 +1,41 @@
+from django.contrib import admin
+from django.db.models import ManyToManyField
+from django.forms import CheckboxSelectMultiple
+
+from agency.forms import ProjectMultipleFileForm
+from agency.models import Image, Media, Project, Review, Tag
+
+from .inlines import ImageInLine, ReviewInLine
+
+
+@admin.register(Project)
+class ProjectAdmin(admin.ModelAdmin):
+    inlines = [ImageInLine, ReviewInLine]
+    form = ProjectMultipleFileForm
+    formfield_overrides = {
+        ManyToManyField: {"widget": CheckboxSelectMultiple},
+    }
+
+    def save_related(self, request, form, formsets, change):
+        super().save_related(request, form, formsets, change)
+
+        project = form.instance
+
+        if request.FILES.getlist("images"):
+            image_exists = list(
+                Image.objects.filter(project=project).values_list("name", flat=True)
+            )
+            for image in request.FILES.getlist("images"):
+                if str(image) not in image_exists:
+                    Image.objects.create(project=project, name=image)
+
+
+@admin.register(Tag)
+class TagAdmin(admin.ModelAdmin):
+    fields = ["name"]
+
+    def has_add_permission(self, request):
+        return "project" not in request.path
+
+
+admin.site.register((Review, Media, Image))
