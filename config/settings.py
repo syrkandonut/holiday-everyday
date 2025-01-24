@@ -17,6 +17,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+SERVER_URI = os.getenv("SERVER_URI")
 SERVER_NGINX_URI = os.getenv("SERVER_NGINX_URI")
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.

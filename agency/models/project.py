@@ -33,7 +33,7 @@ class Project(Base):
         verbose_name="Площадка проведения проекта",
     )
     photographer: CharField = CharField(max_length=64, verbose_name="Фотограф")
-    video_url: URLField = URLField(
+    video: URLField = URLField(
         max_length=512,
         verbose_name="Ссылка на видео проекта",
     )
