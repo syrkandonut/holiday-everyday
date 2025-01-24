@@ -17,6 +17,7 @@ djangorestframework-stubs = "^3.15.2"
 pillow = "^11.1.0"
 djangorestframework-camel-case = "^1.4.2"
 django-cleanup = "^9.0.0"
+python-dotenv = "^1.0.1"
 
 [tool.ruff.lint]
 # Enable pycodestyle (`E`) and Pyflakes (`F`) codes by default.
