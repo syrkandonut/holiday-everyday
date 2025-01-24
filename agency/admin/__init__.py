@@ -5,6 +5,7 @@ from django.forms import CheckboxSelectMultiple
 from agency.forms import ProjectMultipleFileForm
 from agency.models import Image, Media, Project, Review, Tag
 
+from .actions import make_published, make_unpublished
 from .inlines import ImageInLine, ReviewInLine
 
 
@@ -12,6 +13,8 @@ from .inlines import ImageInLine, ReviewInLine
 class ProjectAdmin(admin.ModelAdmin):
     inlines = [ImageInLine, ReviewInLine]
     form = ProjectMultipleFileForm
+    actions = [make_published, make_unpublished]
+    list_display = ("title", "published")
     formfield_overrides = {
         ManyToManyField: {"widget": CheckboxSelectMultiple},
     }
