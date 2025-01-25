@@ -9,3 +9,7 @@ lint:
 .PHONY: format
 format:
 	python scripts/format.py
+
+.PHONY: seed
+seed:
+	python manage.py loaddata tags
