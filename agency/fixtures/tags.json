@@ -1,0 +1,56 @@
+[
+    {
+        "model": "agency.tag",
+        "fields": {
+            "name": "на природе"
+        }
+    },
+    {
+        "model": "agency.tag",
+        "fields": {
+            "name": "за городом"
+        }
+    },
+    {
+        "model": "agency.tag",
+        "fields": {
+            "name": "лес"
+        }
+    },
+    {
+        "model": "agency.tag",
+        "fields": {
+            "name": "на берегу моря"
+        }
+    },
+    {
+        "model": "agency.tag",
+        "fields": {
+            "name": "в горах"
+        }
+    },
+    {
+        "model": "agency.tag",
+        "fields": {
+            "name": "заграница"
+        }
+    },
+    {
+        "model": "agency.tag",
+        "fields": {
+            "name": "поместье"
+        }
+    },
+    {
+        "model": "agency.tag",
+        "fields": {
+            "name": "вилла"
+        }
+    },
+    {
+        "model": "agency.tag",
+        "fields": {
+            "name": "ресторан"
+        }
+    }
+]
