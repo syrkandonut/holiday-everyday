@@ -2,11 +2,11 @@ from django.forms import ModelForm
 
 from agency.models import Project
 
-from .multiple import MultipleFileField
+from .multiple import MultipleImageField
 
 
 class ProjectMultipleFileForm(ModelForm):
-    images = MultipleFileField(label="Картинки")
+    images = MultipleImageField(label="Картинки")
 
     class Meta:
         model = Project

@@ -1,13 +1,13 @@
-from django.forms import ClearableFileInput, FileField
+from django.forms import ClearableFileInput, ImageField
 
 
-class MultipleFileInput(ClearableFileInput):
+class MultipleImageInput(ClearableFileInput):
     allow_multiple_selected = True
 
 
-class MultipleFileField(FileField):
+class MultipleImageField(ImageField):
     def __init__(self, *args, **kwargs):
-        kwargs.setdefault("widget", MultipleFileInput())
+        kwargs.setdefault("widget", MultipleImageInput())
         super().__init__(*args, **kwargs)
 
     def clean(self, data, initial=None):
