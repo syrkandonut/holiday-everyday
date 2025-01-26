@@ -17,6 +17,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+SERVER_PORT = os.getenv("SERVER_PORT")
 SERVER_URI = os.getenv("SERVER_URI")
 SERVER_NGINX_URI = os.getenv("SERVER_NGINX_URI")
 
