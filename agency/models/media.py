@@ -35,4 +35,4 @@ class Media(Base):
         verbose_name_plural = "СМИ"
 
     def __str__(self):
-        return f"СМИ {self.name}"
+        return f"{self.name}"

@@ -29,4 +29,4 @@ class Image(Base):
         verbose_name_plural = "Картинки"
 
     def __str__(self):
-        return f"Картинка к проекту {self.project}"
+        return f"{self.project.title} | {self.name}"

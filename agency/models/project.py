@@ -7,6 +7,7 @@ from django.db.models import (
     URLField,
 )
 
+from agency.common.validators.video import rutube_url_validator
 from config.settings import STORAGE_IMAGE_PATH
 
 from .base import Base
@@ -35,7 +36,8 @@ class Project(Base):
     photographer: CharField = CharField(max_length=64, verbose_name="Фотограф")
     video: URLField = URLField(
         max_length=512,
-        verbose_name="Ссылка на видео проекта",
+        verbose_name="Ссылка на видео проекта с Rutube",
+        validators=[rutube_url_validator],
     )
     full_description: TextField = TextField(
         verbose_name="Полное описание проекта",
@@ -58,6 +60,13 @@ class Project(Base):
         db_table = "projects"
         verbose_name = "Проект"
         verbose_name_plural = "Проекты"
+
+    def save(self, *args, **kwargs):
+        share_postfix = "r=plwd"
+        self.video = self.video.replace("?" + share_postfix, str())
+        self.video = self.video.replace("r=plwd", str())
+
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return f"Проект {self.title}"
