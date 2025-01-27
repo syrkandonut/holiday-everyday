@@ -1,7 +1,13 @@
 from rest_framework.serializers import ModelSerializer
 
 from agency.models import Media
-from config.settings import IMAGE_URL, SERVER_NGINX_URI, SERVER_URI, STORAGE_IMAGE_PATH, SERVER_PORT
+from config.settings import (
+    IMAGE_URL,
+    SERVER_NGINX_URI,
+    SERVER_PORT,
+    SERVER_URI,
+    STORAGE_IMAGE_PATH,
+)
 
 
 class MediaSerializer(ModelSerializer):
@@ -27,6 +33,5 @@ class MediaSerializer(ModelSerializer):
             .replace("/" + STORAGE_IMAGE_PATH + "/", str())
             .replace(SERVER_URI.rstrip(f":{SERVER_PORT}"), str())
         )
-
 
         return data
