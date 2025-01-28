@@ -1,0 +1,1 @@
+import{d as o,o as r,c as t,B as n,A as c,u as l,C as p}from"./index-ep92Lj8v.js";const u=o({__name:"DrawerFooter",props:{class:{}},setup(s){const e=s;return(a,m)=>(r(),t("div",{class:c(l(p)("mt-auto flex flex-col gap-2 p-4",e.class))},[n(a.$slots,"default")],2))}});export{u as _};

@@ -1,1 +1,0 @@
-import{_ as e,o as s,c as o}from"./index-Ab6kkPJ9.js";const a={},c={class:"h-[32rem] w-full",src:"https://weddywood.ru/nezhnaja-klassika-svadba-v-nebesno-goluboj-palitre/"};function r(t,n){return s(),o("iframe",c)}const l=e(a,[["render",r]]);export{l as default};
