@@ -2,55 +2,55 @@
     {
         "model": "agency.tag",
         "fields": {
-            "name": "на природе"
+            "name": "На природе"
         }
     },
     {
         "model": "agency.tag",
         "fields": {
-            "name": "за городом"
+            "name": "За городом"
         }
     },
     {
         "model": "agency.tag",
         "fields": {
-            "name": "лес"
+            "name": "Лес"
         }
     },
     {
         "model": "agency.tag",
         "fields": {
-            "name": "на берегу моря"
+            "name": "На берегу моря"
         }
     },
     {
         "model": "agency.tag",
         "fields": {
-            "name": "в горах"
+            "name": "В горах"
         }
     },
     {
         "model": "agency.tag",
         "fields": {
-            "name": "заграница"
+            "name": "Заграница"
         }
     },
     {
         "model": "agency.tag",
         "fields": {
-            "name": "поместье"
+            "name": "Поместье"
         }
     },
     {
         "model": "agency.tag",
         "fields": {
-            "name": "вилла"
+            "name": "Вилла"
         }
     },
     {
         "model": "agency.tag",
         "fields": {
-            "name": "ресторан"
+            "name": "Ресторан"
         }
     }
 ]
