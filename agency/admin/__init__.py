@@ -24,9 +24,9 @@ class ProjectAdmin(admin.ModelAdmin):
 
     def get_link(self, obj):
         return format_html(
-            f'<a href="{SERVER_NGINX_URI}/api/projects/{{}}">{{}}</a>',
+            f'<a href="{SERVER_NGINX_URI}/portfolio/{{}}/">{{}}</a>',
             obj.id,
-            obj,
+            obj.title,
         )
 
     get_link.short_description = "Предпросмотр"  # type: ignore
