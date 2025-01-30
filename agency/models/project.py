@@ -38,6 +38,8 @@ class Project(Base):
         max_length=512,
         verbose_name="Ссылка на видео проекта с Rutube",
         validators=[rutube_url_validator],
+        null=True,
+        blank=True,
     )
     full_description: TextField = TextField(
         verbose_name="Полное описание проекта",
