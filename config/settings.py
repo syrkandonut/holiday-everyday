@@ -157,8 +157,16 @@ STATIC_PATH = "static"
 STATIC_ROOT = os.path.join(BASE_DIR, STATIC_PATH)
 
 IMAGE_URL = "/image/"
+IMAGE_THUMB_URL = "/image/thumb/"
 STORAGE_IMAGE_PATH = "storage/images"
+STORAGE_IMAGE_THUMB_SUB_PATH = "thumbnails"
 IMAGE_ROOT = os.path.join(BASE_DIR, STORAGE_IMAGE_PATH)
+IMAGE_THUMB_ROOT = os.path.join(
+    BASE_DIR, STORAGE_IMAGE_PATH, STORAGE_IMAGE_THUMB_SUB_PATH
+)
+
+IMG_BIG_SIZE = (1280, 720)
+IMG_SMALL_SIZE = (256, 144)
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
