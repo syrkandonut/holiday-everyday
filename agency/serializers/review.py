@@ -3,12 +3,19 @@ import re
 from rest_framework.serializers import ModelSerializer, SerializerMethodField
 
 from agency.models import Review
+from config.settings import (
+    IMAGE_URL,
+    SERVER_NGINX_URI,
+    SERVER_PORT,
+    SERVER_URI,
+    STORAGE_IMAGE_PATH,
+)
 
 
 class ReviewSerializer(ModelSerializer):
     class Meta:
         model = Review
-        fields = ["text", "video"]
+        fields = ["preview_image", "text", "video"]
 
     text = SerializerMethodField()
 
@@ -17,3 +24,16 @@ class ReviewSerializer(ModelSerializer):
 
     def get_text(self, obj: Review):
         return self.convert_to_nbsp(obj.text)
+
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+
+        data["preview_image"] = (
+            SERVER_NGINX_URI
+            + IMAGE_URL
+            + str(data["preview_image"])
+            .replace("/" + STORAGE_IMAGE_PATH + "/", str())
+            .replace(SERVER_URI.rstrip(f":{SERVER_PORT}"), str())
+        )
+
+        return data
