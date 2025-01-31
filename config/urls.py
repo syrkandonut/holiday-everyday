@@ -21,7 +21,11 @@ from django.urls import include, path
 
 from config import settings
 
-urlpatterns = [
-    path("api/admin/", admin.site.urls),
-    path("api/", include("agency.urls")),
-] + static(settings.IMAGE_URL, document_root=settings.IMAGE_ROOT)
+urlpatterns = (
+    [
+        path("api/admin/", admin.site.urls),
+        path("api/", include("agency.urls")),
+    ]
+    + static(settings.IMAGE_URL, document_root=settings.IMAGE_ROOT)
+    + static(settings.IMAGE_THUMB_URL, document_root=settings.IMAGE_THUMB_ROOT)
+)
