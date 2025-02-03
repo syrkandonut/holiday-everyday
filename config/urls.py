@@ -26,7 +26,16 @@ urlpatterns = (
     [
         path("api/admin/", admin.site.urls),
         path("admin/", RedirectView.as_view(url='/api/admin/', permanent=True)),
+        path("admin", RedirectView.as_view(url='/api/admin/', permanent=True)),
+
         path("api/", include("agency.urls")),
+        path("api", RedirectView.as_view(url='/api/', permanent=True)),
+
+        path("api/media/", include("agency.urls")),
+        path("api/media", RedirectView.as_view(url='/api/media/', permanent=True)),
+
+        path("api/projects/", include("agency.urls")),
+        path("api/projects", RedirectView.as_view(url='/api/media/', permanent=True)),
     ]
     + static(settings.IMAGE_URL, document_root=settings.IMAGE_ROOT)
     + static(settings.IMAGE_THUMB_URL, document_root=settings.IMAGE_THUMB_ROOT)
