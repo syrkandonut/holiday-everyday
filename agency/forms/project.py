@@ -1,12 +1,12 @@
-from django.forms import ModelForm
+from django.forms import ClearableFileInput, ImageField, ModelForm
 
 from agency.models import Project
 
-from .multiple import MultipleImageField
-
 
 class ProjectMultipleFileForm(ModelForm):
-    images = MultipleImageField(label="Картинки")
+    images = ImageField(
+        widget=ClearableFileInput(attrs={"multiple": True}), label="Картинки"
+    )
 
     class Meta:
         model = Project
