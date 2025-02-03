@@ -1,7 +1,7 @@
 from rest_framework.serializers import ModelSerializer
 
 from agency.models import Image
-from config.settings import IMAGE_URL, SERVER_NGINX_URI, STORAGE_IMAGE_PATH
+from config.settings import IMAGE_URL, SERVER_URI, STORAGE_IMAGE_PATH
 
 
 class ImageSerializer(ModelSerializer):
@@ -12,7 +12,7 @@ class ImageSerializer(ModelSerializer):
     def to_representation(self, instance):
         data = super().to_representation(instance)
         data["name"] = (
-            SERVER_NGINX_URI
+            SERVER_URI
             + IMAGE_URL
             + str(data["name"]).replace("/" + STORAGE_IMAGE_PATH + "/", str())
         )

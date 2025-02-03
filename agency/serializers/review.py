@@ -5,7 +5,7 @@ from rest_framework.serializers import ModelSerializer, SerializerMethodField
 from agency.models import Review
 from config.settings import (
     IMAGE_URL,
-    SERVER_NGINX_URI,
+    SERVER_URI,
     SERVER_PORT,
     SERVER_URI,
     STORAGE_IMAGE_PATH,
@@ -29,7 +29,7 @@ class ReviewSerializer(ModelSerializer):
         data = super().to_representation(instance)
 
         data["preview_image"] = (
-            SERVER_NGINX_URI
+            SERVER_URI
             + IMAGE_URL
             + str(data["preview_image"])
             .replace("/" + STORAGE_IMAGE_PATH + "/", str())

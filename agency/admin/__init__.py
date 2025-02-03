@@ -5,7 +5,7 @@ from django.utils.html import format_html
 
 from agency.forms import ProjectMultipleFileForm
 from agency.models import Image, Media, Project, Review, Tag
-from config.settings import SERVER_NGINX_URI
+from config.settings import SERVER_URI
 
 from .actions import make_published, make_unpublished
 from .inlines import ImageInLine, ReviewInLine
@@ -24,7 +24,7 @@ class ProjectAdmin(admin.ModelAdmin):
 
     def get_link(self, obj):
         return format_html(
-            f'<a href="{SERVER_NGINX_URI}/portfolio/{{}}/">{{}}</a>',
+            f'<a href="{SERVER_URI}/portfolio/{{}}/">{{}}</a>',
             obj.id,
             obj.title,
         )

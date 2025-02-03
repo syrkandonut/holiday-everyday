@@ -19,7 +19,6 @@ load_dotenv()
 
 SERVER_PORT = os.getenv("SERVER_PORT")
 SERVER_URI = os.getenv("SERVER_URI")
-SERVER_NGINX_URI = os.getenv("SERVER_NGINX_URI")
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent

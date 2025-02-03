@@ -4,7 +4,7 @@ from rest_framework.serializers import (
 )
 
 from agency.models import Image, Project, Review
-from config.settings import IMAGE_URL, SERVER_NGINX_URI, STORAGE_IMAGE_PATH
+from config.settings import IMAGE_URL, SERVER_URI, STORAGE_IMAGE_PATH
 
 from .image import ImageSerializer
 from .review import ReviewSerializer
@@ -16,7 +16,7 @@ class ProjectCommonSerializer(ModelSerializer):
         data = super().to_representation(instance)
 
         data["preview_image"] = (
-            str(SERVER_NGINX_URI)
+            str(SERVER_URI)
             + IMAGE_URL
             + str(instance.preview_image).replace(STORAGE_IMAGE_PATH + "/", str())
         )
