@@ -153,8 +153,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = "/static/"
-STATIC_PATH = "static"
-STATIC_ROOT = os.path.join(BASE_DIR, STATIC_PATH)
+
+STATIC_ASSETS_URL = "/assets/"
+STATIC_ASSETS_PATH = "static/assets"
+STATIC_ASSETS_ROOT = os.path.join(BASE_DIR, STATIC_ASSETS_PATH)
+
+STATIC_IMAGES_URL = "/images/"
+STATIC_IMAGES_PATH = "static/images"
+STATIC_IMAGES_ROOT = os.path.join(BASE_DIR, STATIC_IMAGES_PATH)
 
 IMAGE_URL = "/image/"
 IMAGE_THUMB_URL = "/image/thumb/"

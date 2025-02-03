@@ -17,15 +17,22 @@ Including another URLconf
 
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import include, path
+from django.urls import include, re_path, path
+from django.views.generic.base import TemplateView, RedirectView
 
 from config import settings
 
 urlpatterns = (
     [
         path("api/admin/", admin.site.urls),
+        path("admin/", RedirectView.as_view(url='/api/admin/', permanent=True)),
         path("api/", include("agency.urls")),
     ]
     + static(settings.IMAGE_URL, document_root=settings.IMAGE_ROOT)
     + static(settings.IMAGE_THUMB_URL, document_root=settings.IMAGE_THUMB_ROOT)
+    + static(settings.STATIC_ASSETS_URL, document_root=settings.STATIC_ASSETS_ROOT)
+    + static(settings.STATIC_IMAGES_URL, document_root=settings.STATIC_IMAGES_ROOT)
+    + [
+        re_path(r"^", TemplateView.as_view(template_name="index.html"), name="index"),
+    ]
 )
