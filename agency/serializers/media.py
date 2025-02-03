@@ -4,8 +4,6 @@ from agency.models import Media
 from config.settings import (
     IMAGE_URL,
     SERVER_URI,
-    SERVER_PORT,
-    SERVER_URI,
     STORAGE_IMAGE_PATH,
 )
 

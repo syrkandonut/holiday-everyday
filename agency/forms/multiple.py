@@ -2,6 +2,7 @@ from django.forms import ClearableFileInput, ImageField
 
 # Deprecated with downgrade from Django 5 to Django 4.2
 
+
 class MultipleImageInput(ClearableFileInput):
     allow_multiple_selected = True
 

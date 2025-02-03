@@ -6,8 +6,6 @@ from agency.models import Review
 from config.settings import (
     IMAGE_URL,
     SERVER_URI,
-    SERVER_PORT,
-    SERVER_URI,
     STORAGE_IMAGE_PATH,
 )
 
@@ -31,9 +29,7 @@ class ReviewSerializer(ModelSerializer):
         data["preview_image"] = (
             SERVER_URI
             + IMAGE_URL
-            + str(data["preview_image"])
-            .replace("/" + STORAGE_IMAGE_PATH + "/", str())
-            .replace(SERVER_URI.rstrip(f":{SERVER_PORT}"), str())
+            + str(data["preview_image"]).replace("/" + STORAGE_IMAGE_PATH + "/", str())
         )
 
         return data
