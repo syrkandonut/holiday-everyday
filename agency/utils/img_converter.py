@@ -3,7 +3,9 @@ from io import BytesIO
 
 from django.core.files.base import ContentFile
 from PIL import Image as PILImage
+
 from config.settings import IMG_BIG_SIZE
+
 
 def to_webp(image_field):
     image_pil = PILImage.open(image_field)
@@ -22,17 +24,17 @@ def to_webp(image_field):
 
 #### Thumbnail storage is deprecated for the project ####
 
-    # image_io_thumb = BytesIO()
-    # image_pil.thumbnail(IMG_SMALL_SIZE)
-    # image_pil.save(image_io_thumb, format="WEBP")
-    # image_io_thumb.seek(0)
+# image_io_thumb = BytesIO()
+# image_pil.thumbnail(IMG_SMALL_SIZE)
+# image_pil.save(image_io_thumb, format="WEBP")
+# image_io_thumb.seek(0)
 
-    # image_name_thumb = os.path.join(
-    #     os.path.dirname(image_field.name),
-    #     "/storage/images/thumbnails",
-    #     os.path.splitext(os.path.basename(image_field.name))[0] + ".webp",
-    # )
+# image_name_thumb = os.path.join(
+#     os.path.dirname(image_field.name),
+#     "/storage/images/thumbnails",
+#     os.path.splitext(os.path.basename(image_field.name))[0] + ".webp",
+# )
 
-    # if not os.path.exists(image_name_thumb):
-    #     with open(image_name_thumb, "wb") as f:
-    #         f.write(image_io_thumb.read())
+# if not os.path.exists(image_name_thumb):
+#     with open(image_name_thumb, "wb") as f:
+#         f.write(image_io_thumb.read())

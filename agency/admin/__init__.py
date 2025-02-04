@@ -5,7 +5,7 @@ from django.utils.html import format_html
 
 from agency.forms import ProjectMultipleFileForm
 from agency.models import Image, Media, Project, Review, Tag
-from config.settings import SERVER_URI, STORAGE_IMAGE_PATH, IMAGE_URL
+from config.settings import IMAGE_URL, SERVER_URI, STORAGE_IMAGE_PATH
 
 from .actions import make_published, make_unpublished
 from .inlines import ImageInLine, ReviewInLine
