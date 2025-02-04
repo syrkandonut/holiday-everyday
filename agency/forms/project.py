@@ -5,7 +5,7 @@ from agency.models import Project
 
 class ProjectMultipleFileForm(ModelForm):
     images = ImageField(
-        widget=ClearableFileInput(attrs={"multiple": True}), label="Картинки"
+        widget=ClearableFileInput(attrs={"multiple": True}), label="Картинки проекта"
     )
 
     class Meta:

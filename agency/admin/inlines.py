@@ -1,4 +1,4 @@
-from django.contrib.admin import TabularInline
+from django.contrib.admin import StackedInline, TabularInline
 
 from agency.models import Image, Review
 
@@ -9,5 +9,5 @@ class ImageInLine(TabularInline):
     fields = ["name"]
 
 
-class ReviewInLine(TabularInline):
+class ReviewInLine(StackedInline):
     model = Review

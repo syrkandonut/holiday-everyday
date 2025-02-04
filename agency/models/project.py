@@ -8,7 +8,7 @@ from django.db.models import (
 )
 
 from agency.common.validators.video import rutube_url_validator
-from agency.utils.img_converter import to_webp_and_save_thumbnail
+from agency.utils.img_converter import to_webp
 from config.settings import STORAGE_IMAGE_PATH
 
 from .base import Base
@@ -17,7 +17,7 @@ from .tag import Tag
 PROJECT_TYPES = (
     ("WEDDING", "Свадьба"),
     ("CORPORATE", "Корпоратив"),
-    ("PRIVATE", "Частное"),
+    ("PRIVATE", "Личные праздники"),
 )
 
 
@@ -54,7 +54,7 @@ class Project(Base):
     tags: ManyToManyField = ManyToManyField(
         Tag,
         related_name="projects",
-        verbose_name="Тэги проекта",
+        verbose_name="Тэги проекта ()",
     )
 
     published: BooleanField = BooleanField(verbose_name="Опубликовано", default=False)
@@ -65,11 +65,12 @@ class Project(Base):
         verbose_name_plural = "Проекты"
 
     def save(self, *args, **kwargs):
-        share_postfix = "r=plwd"
-        self.video = self.video.replace("?" + share_postfix, str())
-        self.video = self.video.replace("r=plwd", str())
+        if self.video:
+            share_postfix = "r=plwd"
+            self.video = self.video.replace("?" + share_postfix, str())
+            self.video = self.video.replace("r=plwd", str())
 
-        to_webp_and_save_thumbnail(self.preview_image)
+        to_webp(self.preview_image)
 
         super().save(*args, **kwargs)
 
