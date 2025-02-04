@@ -124,7 +124,7 @@ class Migration(migrations.Migration):
                         choices=[
                             ("WEDDING", "Свадьба"),
                             ("CORPORATE", "Корпоратив"),
-                            ("PRIVATE", "Частное"),
+                            ("PRIVATE", "Личные праздники"),
                         ],
                         default="WEDDING",
                         max_length=64,
@@ -200,8 +200,8 @@ class Migration(migrations.Migration):
                 ),
             ],
             options={
-                "verbose_name": "Картинку",
-                "verbose_name_plural": "Картинки",
+                "verbose_name": "Картинка проекта",
+                "verbose_name_plural": "Картинки проектов",
                 "db_table": "images",
             },
         ),

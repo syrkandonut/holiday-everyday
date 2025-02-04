@@ -14,7 +14,7 @@ class Image(Base):
     name: ImageField = ImageField(
         upload_to=STORAGE_IMAGE_PATH,
         verbose_name="Изображение",
-        unique=True,
+        max_length=512,
     )
 
     project: ForeignKey = ForeignKey(
