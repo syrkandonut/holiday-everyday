@@ -4,7 +4,7 @@ from django.db.models import (
     ImageField,
 )
 
-from agency.utils.img_converter import to_webp_and_save_thumbnail
+from agency.utils.img_converter import to_webp
 from config.settings import STORAGE_IMAGE_PATH
 
 from .base import Base
@@ -26,13 +26,13 @@ class Image(Base):
 
     class Meta:
         db_table = "images"
-        verbose_name = "Картинку"
-        verbose_name_plural = "Картинки"
+        verbose_name = "Картинка проекта"
+        verbose_name_plural = "Картинки проектов"
 
     def save(self, *args, **kwargs):
-        to_webp_and_save_thumbnail(self.name)
+        to_webp(self.name)
 
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return f"{self.project.title} | {self.name}"
+        return f"{self.name}"

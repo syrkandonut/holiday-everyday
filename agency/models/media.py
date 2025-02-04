@@ -5,7 +5,7 @@ from django.db.models import (
     URLField,
 )
 
-from agency.utils.img_converter import to_webp_and_save_thumbnail
+from agency.utils.img_converter import to_webp
 from config.settings import STORAGE_IMAGE_PATH
 
 from .base import Base
@@ -36,8 +36,8 @@ class Media(Base):
         verbose_name_plural = "СМИ"
 
     def save(self, *args, **kwargs):
-        to_webp_and_save_thumbnail(self.preview_image)
-        to_webp_and_save_thumbnail(self.screenshot)
+        to_webp(self.preview_image)
+        to_webp(self.screenshot)
 
         super().save(*args, **kwargs)
 
