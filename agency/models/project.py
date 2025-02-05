@@ -54,7 +54,7 @@ class Project(Base):
     tags: ManyToManyField = ManyToManyField(
         Tag,
         related_name="projects",
-        verbose_name="Тэги проекта ()",
+        verbose_name="Тэги проекта",
     )
 
     published: BooleanField = BooleanField(verbose_name="Опубликовано", default=False)
