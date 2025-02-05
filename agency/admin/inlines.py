@@ -8,8 +8,6 @@ class ImageInLine(TabularInline):
     extra = 0
     fields = ["name"]
 
-    min_num = 1
-
 
 class ReviewInLine(StackedInline):
     model = Review
