@@ -1,7 +1,7 @@
 from django.db.models import CASCADE, ImageField, OneToOneField, TextField, URLField
 
 from agency.common.validators.video import rutube_url_validator
-from agency.utils.img_converter import to_webp
+from agency.utils.img_converter import to_webp_and_thumbnail
 from config.settings import STORAGE_IMAGE_PATH
 
 from .base import Base
@@ -40,7 +40,7 @@ class Review(Base):
             self.video = self.video.replace("?" + share_postfix, str())
             self.video = self.video.replace("r=plwd", str())
 
-        to_webp(self.preview_image)
+        to_webp_and_thumbnail(self.preview_image)
 
         super().save(*args, **kwargs)
 

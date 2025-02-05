@@ -7,7 +7,7 @@ from PIL import Image as PILImage
 from config.settings import IMG_BIG_SIZE
 
 
-def to_webp(image_field):
+def to_webp_and_thumbnail(image_field):
     image_pil = PILImage.open(image_field)
 
     image_io = BytesIO()
@@ -21,6 +21,19 @@ def to_webp(image_field):
         image_content_file = ContentFile(image_io.read())
         image_field.save(image_name, image_content_file, save=False)
 
+
+def to_webp(image_field):
+    image_pil = PILImage.open(image_field)
+
+    image_io = BytesIO()
+
+    image_pil.save(image_io, format="WEBP")
+    image_io.seek(0)
+
+    image_name = f"{os.path.splitext(image_field.name)[0]}.webp"
+    if not os.path.exists(image_name):
+        image_content_file = ContentFile(image_io.read())
+        image_field.save(image_name, image_content_file, save=False)
 
 #### Thumbnail storage is deprecated for the project ####
 

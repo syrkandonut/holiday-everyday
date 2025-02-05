@@ -4,7 +4,7 @@ from django.db.models import (
     ImageField,
 )
 
-from agency.utils.img_converter import to_webp
+from agency.utils.img_converter import to_webp_and_thumbnail
 from config.settings import STORAGE_IMAGE_PATH
 
 from .base import Base
@@ -30,7 +30,7 @@ class Image(Base):
         verbose_name_plural = "Картинки проектов"
 
     def save(self, *args, **kwargs):
-        to_webp(self.name)
+        to_webp_and_thumbnail(self.name)
 
         super().save(*args, **kwargs)
 
