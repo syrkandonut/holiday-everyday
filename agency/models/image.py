@@ -30,7 +30,8 @@ class Image(Base):
         verbose_name_plural = "Картинки проектов"
 
     def save(self, *args, **kwargs):
-        to_webp_and_thumbnail(self.name)
+        if self.name:
+            to_webp_and_thumbnail(self.name)
 
         super().save(*args, **kwargs)
 

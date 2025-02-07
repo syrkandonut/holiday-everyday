@@ -24,7 +24,8 @@ class ImageAdmin(admin.ModelAdmin):
             return format_html(
                 '<img src="{}" style="width: 100px; height: auto;" />', image_url
             )
-        return ""
+
+        return str()
 
     get_name.short_description = "Название"  # type: ignore
     get_thumbnail.short_description = "Изображение"  # type: ignore

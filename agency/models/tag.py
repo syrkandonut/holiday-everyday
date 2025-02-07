@@ -18,7 +18,9 @@ class Tag(Base):
         verbose_name_plural = "Тэги"
 
     def save(self, *args, **kwargs):
-        self.name = self.name.capitalize()
+        if self.name:
+            self.name = self.name.capitalize()
+
         super().save(*args, **kwargs)
 
     def __str__(self):

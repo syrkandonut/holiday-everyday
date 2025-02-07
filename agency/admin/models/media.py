@@ -17,4 +17,6 @@ class MediaAdmin(admin.ModelAdmin):
                 '<img src="{}" style="width: 100px; height: auto;" />', image_url
             )
 
+        return str()
+
     get_thumbnail.short_description = "Превью СМИ"  # type: ignore

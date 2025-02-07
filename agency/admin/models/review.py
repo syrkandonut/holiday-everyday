@@ -20,5 +20,7 @@ class ReviewAdmin(admin.ModelAdmin):
                 '<img src="{}" style="width: 100px; height: auto;" />', image_url
             )
 
+        return str()
+
     get_project.short_description = "Отзыв"  # type: ignore
     get_thumbnail.short_description = "Превью отзыва"  # type: ignore

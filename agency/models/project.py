@@ -97,7 +97,8 @@ class Project(Base):
             self.video = self.video.replace("?" + share_postfix, str())
             self.video = self.video.replace("r=plwd", str())
 
-        to_webp_and_thumbnail(self.preview_image)
+        if self.preview_image:
+            to_webp_and_thumbnail(self.preview_image)
 
         super().save(*args, **kwargs)
 

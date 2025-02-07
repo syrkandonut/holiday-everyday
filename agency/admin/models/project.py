@@ -21,11 +21,14 @@ class ProjectAdmin(admin.ModelAdmin):
     }
 
     def get_link(self, obj):
-        return format_html(
-            f'<a href="{SERVER_URI}/portfolio/{{}}/" target="_blank">{{}}</a>',
-            obj.id,
-            obj.title,
-        )
+        if obj:
+            return format_html(
+                f'<a href="{SERVER_URI}/portfolio/{{}}/" target="_blank">{{}}</a>',
+                obj.id,
+                obj.title,
+            )
+
+        return str()
 
     get_link.short_description = "Предпросмотр"  # type: ignore
 

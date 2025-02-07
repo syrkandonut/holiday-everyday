@@ -22,7 +22,8 @@ class ImageInLine(TabularInline):
             return format_html(
                 '<img src="{}" style="width: 150px; height: auto;" />', image_url
             )
-        return ""
+
+        return str()
 
     get_thumbnail.short_description = "Картинка"  # type: ignore
 

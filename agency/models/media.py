@@ -56,8 +56,11 @@ class Media(Base):
         verbose_name_plural = "СМИ"
 
     def save(self, *args, **kwargs):
-        to_webp_and_thumbnail(self.preview_image)
-        to_webp(self.screenshot)
+        if self.preview_image:
+            to_webp_and_thumbnail(self.preview_image)
+
+        if self.screenshot:
+            to_webp(self.screenshot)
 
         super().save(*args, **kwargs)
 
