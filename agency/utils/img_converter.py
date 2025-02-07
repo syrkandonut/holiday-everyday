@@ -35,6 +35,7 @@ def to_webp(image_field):
         image_content_file = ContentFile(image_io.read())
         image_field.save(image_name, image_content_file, save=False)
 
+
 #### Thumbnail storage is deprecated for the project ####
 
 # image_io_thumb = BytesIO()
