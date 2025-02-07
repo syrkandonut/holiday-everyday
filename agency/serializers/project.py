@@ -41,7 +41,7 @@ class ProjectOneSerializer(ProjectCommonSerializer):
     def to_representation(self, instance: Project):
         data = super().to_representation(instance)
 
-        project_images = Image.objects.filter(project=instance)
+        project_images = Image.objects.filter(project=instance).order_by("-name")
         if project_images:
             data["images"] = [
                 image["name"]
