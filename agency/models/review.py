@@ -8,11 +8,17 @@ from .base import Base
 
 
 class Review(Base):
-    text: TextField = TextField(verbose_name="Текст отзыва")
+    text: TextField = TextField(
+        verbose_name="Текст отзыва",
+        null=True,
+        blank=True,
+    )
     preview_image: ImageField = ImageField(
         upload_to=STORAGE_IMAGE_PATH,
         max_length=512,
         verbose_name="Картинка к отзыву",
+        null=True,
+        blank=True,
     )
     video: URLField = URLField(
         max_length=512,

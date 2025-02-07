@@ -26,15 +26,39 @@ class Project(Base):
         upload_to=STORAGE_IMAGE_PATH,
         verbose_name="Превью проекта",
         max_length=512,
+        null=True,
+        blank=True,
     )
-    title: CharField = CharField(max_length=256, verbose_name="Заголовок проекта")
-    description: CharField = CharField(max_length=512, verbose_name="Описание проекта")
-    customer: CharField = CharField(max_length=64, verbose_name="Заказчик проекта")
+    title: CharField = CharField(
+        max_length=256,
+        verbose_name="Заголовок проекта",
+        null=True,
+        blank=True,
+    )
+    description: CharField = CharField(
+        max_length=512,
+        verbose_name="Описание проекта",
+        null=True,
+        blank=True,
+    )
+    customer: CharField = CharField(
+        max_length=64,
+        verbose_name="Заказчик проекта",
+        null=True,
+        blank=True,
+    )
     place: CharField = CharField(
         max_length=64,
         verbose_name="Площадка проведения проекта",
+        null=True,
+        blank=True,
     )
-    photographer: CharField = CharField(max_length=64, verbose_name="Фотограф")
+    photographer: CharField = CharField(
+        max_length=64,
+        verbose_name="Фотограф",
+        null=True,
+        blank=True,
+    )
     video: URLField = URLField(
         max_length=512,
         verbose_name="Ссылка на видео проекта с Rutube",
@@ -44,6 +68,8 @@ class Project(Base):
     )
     full_description: TextField = TextField(
         verbose_name="Полное описание проекта",
+        null=True,
+        blank=True,
     )
     type: CharField = CharField(
         choices=PROJECT_TYPES,
@@ -55,6 +81,7 @@ class Project(Base):
         Tag,
         related_name="projects",
         verbose_name="Тэги проекта",
+        blank=True,
     )
 
     published: BooleanField = BooleanField(verbose_name="Опубликовано", default=False)
