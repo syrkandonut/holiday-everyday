@@ -164,7 +164,7 @@ IMAGE_URL = "/image/"
 STORAGE_IMAGE_PATH = "storage/images"
 IMAGE_ROOT = os.path.join(BASE_DIR, STORAGE_IMAGE_PATH)
 
-IMG_BIG_SIZE = (1920, 1080)
+IMG_BIG_SIZE = (4096, 2048)
 IMG_SMALL_SIZE = (256, 144)
 
 # Default primary key field type
