@@ -6,6 +6,7 @@ from config.settings import IMAGE_URL, SERVER_URI, STORAGE_IMAGE_PATH
 
 class ReviewAdmin(admin.ModelAdmin):
     list_display = ("get_project", "get_thumbnail")
+    readonly_fields = ["get_thumbnail"]
 
     def get_project(sellf, obj):
         return obj

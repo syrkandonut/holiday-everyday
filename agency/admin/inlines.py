@@ -20,7 +20,7 @@ class ImageInLine(TabularInline):
                 + f"{obj.name.name.replace(STORAGE_IMAGE_PATH, str())}"
             )
             return format_html(
-                '<img src="{}" style="width: 150px; height: auto;" />', image_url
+                '<img src="{}" style="width: 100px; height: auto;" />', image_url
             )
 
         return str()
