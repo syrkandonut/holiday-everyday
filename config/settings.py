@@ -152,6 +152,10 @@ USE_TZ = True
 
 STATIC_URL = "/static/"
 
+STATIC_FAVICON_URL = "favicon.svg"
+STATIC_FAVICON_PATH = "static/favicon.svg"
+STATIC_FAVICON_ROOT = os.path.join(BASE_DIR, STATIC_FAVICON_PATH)
+
 STATIC_ASSETS_URL = "/assets/"
 STATIC_ASSETS_PATH = "static/assets"
 STATIC_ASSETS_ROOT = os.path.join(BASE_DIR, STATIC_ASSETS_PATH)
@@ -159,6 +163,10 @@ STATIC_ASSETS_ROOT = os.path.join(BASE_DIR, STATIC_ASSETS_PATH)
 STATIC_IMAGES_URL = "/images/"
 STATIC_IMAGES_PATH = "static/images"
 STATIC_IMAGES_ROOT = os.path.join(BASE_DIR, STATIC_IMAGES_PATH)
+
+STATIC_VIDEO_URL = "/video/"
+STATIC_VIDEO_PATH = "static/video"
+STATIC_VIDEO_ROOT = os.path.join(BASE_DIR, STATIC_VIDEO_PATH)
 
 IMAGE_URL = "/image/"
 STORAGE_IMAGE_PATH = "storage/images"
