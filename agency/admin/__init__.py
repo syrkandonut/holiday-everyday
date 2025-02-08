@@ -9,8 +9,7 @@ from .models import MediaAdmin, ProjectAdmin, ReviewAdmin, TagAdmin
 
 
 class AgencySite(AdminSite):
-
-    def get_app_list(self, request):
+    def get_app_list(self, request, format=None):
         app_dict = self._build_app_dict(request)
 
         app_list = sorted(app_dict.values(), key=lambda x: x["name"].lower())
