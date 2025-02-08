@@ -27,13 +27,13 @@ urlpatterns = (
         path("api/admin/", admin.site.urls),
         path("admin/", RedirectView.as_view(url="/api/admin/", permanent=True)),
         path("admin", RedirectView.as_view(url="/api/admin/", permanent=True)),
-        
         path("api/", include("agency.urls")),
         path("api", RedirectView.as_view(url="/api/", permanent=True)),
-        
-        path("api/projects", RedirectView.as_view(url="/api/projects/", permanent=True)),
+        path(
+            "api/projects", RedirectView.as_view(url="/api/projects/", permanent=True)
+        ),
         path("api/media", RedirectView.as_view(url="/api/media/", permanent=True)),
-        path("api/tags", RedirectView.as_view(url="api/tags/", permanent=True))
+        path("api/tags", RedirectView.as_view(url="api/tags/", permanent=True)),
     ]
     + static(settings.IMAGE_URL, document_root=settings.IMAGE_ROOT)
     + static(settings.STATIC_ASSETS_URL, document_root=settings.STATIC_ASSETS_ROOT)
