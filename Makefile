@@ -17,7 +17,7 @@ admin:
 
 .PHONY: makemigra
 makemigra:
-	pyhon manage.py makemigrations
+	python manage.py makemigrations
 
 .PHONY: migra
 migra:
