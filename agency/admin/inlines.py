@@ -9,7 +9,7 @@ class ImageInLine(TabularInline):
     model = Image
     extra = 0
     fields = ["name", "get_thumbnail"]
-    ordering = ["-name"]
+    ordering = ["-created_at"]
 
     readonly_fields = ["get_thumbnail"]
 

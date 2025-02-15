@@ -2,6 +2,7 @@ from django.db.models import (
     CASCADE,
     ForeignKey,
     ImageField,
+    DateTimeField,
 )
 
 from agency.utils.img_converter import to_webp
@@ -22,6 +23,10 @@ class Image(Base):
         related_name="images",
         on_delete=CASCADE,
         verbose_name="Проект",
+    )
+
+    created_at: DateTimeField = DateTimeField(
+        auto_now_add=True,
     )
 
     class Meta:
