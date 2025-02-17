@@ -49,7 +49,7 @@ class ProjectAdmin(admin.ModelAdmin):
         super().save_related(request, form, formsets, change)
 
         project = form.instance
-        print(request.content_params, request.content_type, request.FILES)
+
         if request.FILES.getlist("images"):
             image_exists = list(
                 Image.objects.filter(project=project).values_list("name", flat=True)

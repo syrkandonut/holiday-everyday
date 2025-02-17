@@ -1,8 +1,8 @@
 from django.db.models import (
     CASCADE,
+    DateTimeField,
     ForeignKey,
     ImageField,
-    DateTimeField,
 )
 
 from agency.utils.img_converter import to_webp
