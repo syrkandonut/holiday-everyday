@@ -1,8 +1,10 @@
+from adminsortable.admin import SortableMixin
 from django.db.models import (
     CASCADE,
     DateTimeField,
     ForeignKey,
     ImageField,
+    PositiveIntegerField,
 )
 
 from agency.utils.img_converter import to_webp
@@ -11,7 +13,7 @@ from config.settings import STORAGE_IMAGE_PATH
 from .base import Base
 
 
-class Image(Base):
+class Image(Base, SortableMixin):
     name: ImageField = ImageField(
         upload_to=STORAGE_IMAGE_PATH,
         verbose_name="Изображение",
@@ -25,14 +27,13 @@ class Image(Base):
         verbose_name="Проект",
     )
 
-    created_at: DateTimeField = DateTimeField(
-        auto_now_add=True,
-    )
+    order = PositiveIntegerField(default=0, db_index=True)
 
     class Meta:
         db_table = "images"
         verbose_name = "Картинка проекта"
         verbose_name_plural = "Картинки проектов"
+        ordering = ["order"]
 
     def save(self, *args, **kwargs):
         if self.name:

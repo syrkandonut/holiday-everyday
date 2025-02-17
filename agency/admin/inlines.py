@@ -1,15 +1,16 @@
-from django.contrib.admin import StackedInline, TabularInline
+from adminsortable.admin import SortableTabularInline
+from django.contrib.admin import StackedInline
 from django.utils.html import format_html
 
 from agency.models import Image, Review
 from config.settings import IMAGE_URL, SERVER_URI, STORAGE_IMAGE_PATH
 
 
-class ImageInLine(TabularInline):
+class ImageInLine(SortableTabularInline):
     model = Image
     extra = 0
     fields = ["name", "get_thumbnail"]
-    ordering = ["created_at"]
+    ordering = ["order"]
 
     readonly_fields = ["get_thumbnail"]
 

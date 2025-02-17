@@ -1,4 +1,4 @@
-from django.contrib import admin
+from adminsortable.admin import SortableAdmin
 from django.db.models import ManyToManyField
 from django.forms import CheckboxSelectMultiple
 from django.utils.html import format_html
@@ -10,7 +10,7 @@ from agency.models import Image
 from config.settings import IMAGE_URL, SERVER_URI, STORAGE_IMAGE_PATH
 
 
-class ProjectAdmin(admin.ModelAdmin):
+class ProjectAdmin(SortableAdmin):
     inlines = [ImageInLine]
     form = ProjectMultipleFileForm
     actions = [make_published, make_unpublished]
