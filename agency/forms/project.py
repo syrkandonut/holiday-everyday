@@ -6,7 +6,7 @@ from agency.models import Project
 class ProjectMultipleFileForm(ModelForm):
     images = ImageField(
         widget=ClearableFileInput(attrs={"multiple": True}),
-        label="Картинки проекта",
+        label="Добавить картинки",
         required=False,
     )
 

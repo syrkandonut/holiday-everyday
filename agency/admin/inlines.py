@@ -1,5 +1,6 @@
 from adminsortable.admin import SortableTabularInline
 from django.contrib.admin import StackedInline
+from django.urls import reverse
 from django.utils.html import format_html
 
 from agency.models import Image, Review
@@ -9,10 +10,12 @@ from config.settings import IMAGE_URL, SERVER_URI, STORAGE_IMAGE_PATH
 class ImageInLine(SortableTabularInline):
     model = Image
     extra = 0
-    fields = ["name", "get_thumbnail"]
-    ordering = ["order"]
 
-    readonly_fields = ["get_thumbnail"]
+    fields = ["name", "get_thumbnail", "delete_button"]
+    readonly_fields = ["get_thumbnail", "delete_button"]
+    can_delete = False
+
+    ordering = ["order"]
 
     def get_thumbnail(self, obj):
         if obj.name:
@@ -26,7 +29,14 @@ class ImageInLine(SortableTabularInline):
 
         return str()
 
+    def delete_button(self, obj):
+        return format_html(
+            '<a class="button" href="{}" style="background-color: #ba2121; color: white;">Удалить</a>',
+            reverse('admin:agency_delete_image', args=[obj.pk])
+        )
+    
     get_thumbnail.short_description = "Картинка"  # type: ignore
+    delete_button.short_description = 'Удалить'
 
 
 # Deprecated 07.02.2025 according to the requirements

@@ -201,7 +201,7 @@ class Migration(migrations.Migration):
             ],
             options={
                 "verbose_name": "Картинка проекта",
-                "verbose_name_plural": "Картинки проектов",
+                "verbose_name_plural": "Картинки проекта",
                 "db_table": "images",
             },
         ),
