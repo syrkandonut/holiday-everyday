@@ -170,6 +170,10 @@ STATIC_VIDEO_URL = "/video/"
 STATIC_VIDEO_PATH = "static/video"
 STATIC_VIDEO_ROOT = os.path.join(BASE_DIR, STATIC_VIDEO_PATH)
 
+STATIC_ADMINSORTABLE_URL = "/static/adminsortable/"
+STATIC_ADMINSORTABLE_PATH = "static/adminsortable/static/adminsortable"
+STATIC_ADMINSORTABLE_ROOT = os.path.join(BASE_DIR, STATIC_ADMINSORTABLE_PATH)
+
 IMAGE_URL = "/image/"
 STORAGE_IMAGE_PATH = "storage/images"
 IMAGE_ROOT = os.path.join(BASE_DIR, STORAGE_IMAGE_PATH)
