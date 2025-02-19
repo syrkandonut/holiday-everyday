@@ -1,7 +1,6 @@
-from adminsortable.admin import SortableMixin
+from adminsortable.admin import SortableMixin  # type: ignore
 from django.db.models import (
     CASCADE,
-    DateTimeField,
     ForeignKey,
     ImageField,
     PositiveIntegerField,
@@ -27,7 +26,7 @@ class Image(Base, SortableMixin):
         verbose_name="Проект",
     )
 
-    order = PositiveIntegerField(default=0, db_index=True)
+    order: PositiveIntegerField = PositiveIntegerField(default=0, db_index=True)
 
     class Meta:
         db_table = "images"
