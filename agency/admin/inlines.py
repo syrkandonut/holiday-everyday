@@ -1,4 +1,4 @@
-from adminsortable.admin import SortableTabularInline
+from adminsortable.admin import SortableTabularInline  # type: ignore
 from django.contrib.admin import StackedInline
 from django.urls import reverse
 from django.utils.html import format_html
@@ -31,12 +31,14 @@ class ImageInLine(SortableTabularInline):
 
     def delete_button(self, obj):
         return format_html(
-            '<a class="button" href="{}" style="background-color: #ba2121; color: white;">Удалить</a>',
-            reverse('admin:agency_delete_image', args=[obj.pk])
+            '<a class="button" href="{}" '
+            'style="background-color: #ba2121; color: white;"'
+            ">Удалить</a>",
+            reverse("admin:agency_delete_image", args=[obj.pk]),
         )
-    
+
     get_thumbnail.short_description = "Картинка"  # type: ignore
-    delete_button.short_description = 'Удалить'
+    delete_button.short_description = "Удалить"  # type: ignore
 
 
 # Deprecated 07.02.2025 according to the requirements

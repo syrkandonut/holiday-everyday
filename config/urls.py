@@ -40,7 +40,10 @@ urlpatterns = (
     + static(settings.STATIC_IMAGES_URL, document_root=settings.STATIC_IMAGES_ROOT)
     + static(settings.STATIC_VIDEO_URL, document_root=settings.STATIC_VIDEO_ROOT)
     + static(settings.STATIC_FAVICON_URL, document_root=settings.STATIC_FAVICON_ROOT)
-    + static(settings.STATIC_ADMINSORTABLE_URL, document_root=settings.STATIC_ADMINSORTABLE_ROOT)
+    + static(
+        settings.STATIC_ADMINSORTABLE_URL,
+        document_root=settings.STATIC_ADMINSORTABLE_ROOT,
+    )
     + [
         re_path(r"^", TemplateView.as_view(template_name="index.html"), name="index"),
     ]
