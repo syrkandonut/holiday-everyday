@@ -21,6 +21,7 @@ class ProjectAdmin(SortableAdmin):
     formfield_overrides = {
         ManyToManyField: {"widget": CheckboxSelectMultiple},
     }
+    ordering = ["-created_at"]
 
     @display(description="Действие")
     def publish_button(self, obj):

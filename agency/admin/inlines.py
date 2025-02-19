@@ -39,7 +39,7 @@ class ImageInLine(SortableTabularInline):
 
     def has_add_permission(self, request, obj=None):
         return False
-    
+
     get_thumbnail.short_description = "Картинка"  # type: ignore
     delete_button.short_description = "Удалить"  # type: ignore
 
