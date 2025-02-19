@@ -28,7 +28,7 @@ class ProjectAdmin(SortableAdmin):
             return "Недоступно для публикации, добавьте заголовок и превью"
 
         if obj.published:
-            button_text = "В архив"
+            button_text = "Снять с публикации"
             button_color = "grey"
         else:
             button_text = "Опубликовать"
