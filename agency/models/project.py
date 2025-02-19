@@ -86,6 +86,14 @@ class Project(Base):
 
     published: BooleanField = BooleanField(verbose_name="Опубликовано", default=False)
 
+    def publish(self):
+        self.is_published = True
+        self.save()
+
+    def unpublish(self):
+        self.is_published = False
+        self.save()
+
     class Meta:
         db_table = "projects"
         verbose_name = "Проект"
