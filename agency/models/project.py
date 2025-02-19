@@ -1,6 +1,7 @@
 from django.db.models import (
     BooleanField,
     CharField,
+    DateTimeField,
     ImageField,
     ManyToManyField,
     TextField,
@@ -83,8 +84,11 @@ class Project(Base):
         verbose_name="Тэги проекта",
         blank=True,
     )
-
     published: BooleanField = BooleanField(verbose_name="Опубликовано", default=False)
+    created_at: DateTimeField = DateTimeField(
+        verbose_name="Дата и время создания",
+        auto_now_add=True,
+    )
 
     def publish(self):
         self.is_published = True
