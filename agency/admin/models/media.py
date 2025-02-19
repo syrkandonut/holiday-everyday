@@ -5,8 +5,9 @@ from config.settings import IMAGE_URL, SERVER_URI, STORAGE_IMAGE_PATH
 
 
 class MediaAdmin(admin.ModelAdmin):
-    list_display = ("name", "get_thumbnail")
+    list_display = ("title", "name", "get_thumbnail")
     readonly_fields = ["get_thumbnail"]
+    ordering = ["-date"]
 
     def get_thumbnail(self, obj):
         if obj.preview_image:
