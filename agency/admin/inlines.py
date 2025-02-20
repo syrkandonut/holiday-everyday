@@ -37,8 +37,8 @@ class ImageInLine(SortableTabularInline):
             reverse("admin:agency_delete_image", args=[obj.pk]),
         )
 
-    def has_add_permission(self, request, obj=None):
-        return False
+    # def has_add_permission(self, request, obj=None):
+    #     return False
 
     get_thumbnail.short_description = "Картинка"  # type: ignore
     delete_button.short_description = "Удалить"  # type: ignore
