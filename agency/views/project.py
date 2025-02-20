@@ -6,7 +6,7 @@ from agency.serializers.project import ProjectOneSerializer, ProjectSerializer
 
 
 class ProjectViewSet(ModelViewSet):
-    queryset = Project.objects.all().order_by("-created_at")
+    queryset = Project.objects.all()
     serializer_class = ProjectSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 

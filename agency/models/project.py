@@ -100,6 +100,8 @@ class Project(Base):
 
     class Meta:
         db_table = "projects"
+        ordering = ['-created_at']
+
         verbose_name = "Проект"
         verbose_name_plural = "Проекты"
 
