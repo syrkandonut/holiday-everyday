@@ -164,7 +164,7 @@ STATIC_CONFIG = {
     "/assets/": "static/assets",
     "/images/": "static/images",
     "/video/": "static/video",
-    "/adminsortable/": "static/adminsortable/static/adminsortable",
+    "/static/adminsortable/": "static/adminsortable/static/adminsortable",
     IMAGE_URL: STORAGE_IMAGE_PATH,
 }
 
