@@ -92,11 +92,13 @@ TEMPLATES = [
         },
     },
 ]
+
 CSRF_TRUSTED_ORIGINS = [
     "https://*.mydomain.com",
     "http://localhost:8000",
     "http://localhost:1234",
 ]
+
 WSGI_APPLICATION = "config.wsgi.application"
 
 
@@ -154,30 +156,20 @@ USE_TZ = True
 
 STATIC_URL = "/static/"
 
-STATIC_FAVICON_URL = "favicon.svg"
-STATIC_FAVICON_PATH = "static/favicon.svg"
-STATIC_FAVICON_ROOT = os.path.join(BASE_DIR, STATIC_FAVICON_PATH)
-
-STATIC_ASSETS_URL = "/assets/"
-STATIC_ASSETS_PATH = "static/assets"
-STATIC_ASSETS_ROOT = os.path.join(BASE_DIR, STATIC_ASSETS_PATH)
-
-STATIC_IMAGES_URL = "/images/"
-STATIC_IMAGES_PATH = "static/images"
-STATIC_IMAGES_ROOT = os.path.join(BASE_DIR, STATIC_IMAGES_PATH)
-
-STATIC_VIDEO_URL = "/video/"
-STATIC_VIDEO_PATH = "static/video"
-STATIC_VIDEO_ROOT = os.path.join(BASE_DIR, STATIC_VIDEO_PATH)
-
-STATIC_ADMINSORTABLE_URL = "/static/adminsortable/"
-STATIC_ADMINSORTABLE_PATH = "static/adminsortable/static/adminsortable"
-STATIC_ADMINSORTABLE_ROOT = os.path.join(BASE_DIR, STATIC_ADMINSORTABLE_PATH)
-
-IMAGE_URL = "/image/"
+IMAGE_URL = "/image"
 STORAGE_IMAGE_PATH = "storage/images"
-IMAGE_ROOT = os.path.join(BASE_DIR, STORAGE_IMAGE_PATH)
 
+STATIC_CONFIG = {
+    "favicon.svg": "static/favicon.svg",
+    "/assets/": "static/assets",
+    "/images/": "static/images",
+    "/video/": "static/video",
+    "/adminsortable/": "static/adminsortable/static/adminsortable",
+    IMAGE_URL: STORAGE_IMAGE_PATH,
+}
+
+
+# Image resolution for the compression to webp
 IMG_BIG_SIZE = (4096, 2048)
 IMG_SMALL_SIZE = (256, 144)
 

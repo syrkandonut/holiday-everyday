@@ -15,12 +15,10 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 
-from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path, re_path
 from django.views.generic.base import RedirectView, TemplateView
-
-from config import settings
+from .collectstatic import STATICFILES
 
 urlpatterns = (
     [
@@ -35,15 +33,7 @@ urlpatterns = (
         path("api/media", RedirectView.as_view(url="/api/media/", permanent=True)),
         path("api/tags", RedirectView.as_view(url="api/tags/", permanent=True)),
     ]
-    + static(settings.IMAGE_URL, document_root=settings.IMAGE_ROOT)
-    + static(settings.STATIC_ASSETS_URL, document_root=settings.STATIC_ASSETS_ROOT)
-    + static(settings.STATIC_IMAGES_URL, document_root=settings.STATIC_IMAGES_ROOT)
-    + static(settings.STATIC_VIDEO_URL, document_root=settings.STATIC_VIDEO_ROOT)
-    + static(settings.STATIC_FAVICON_URL, document_root=settings.STATIC_FAVICON_ROOT)
-    + static(
-        settings.STATIC_ADMINSORTABLE_URL,
-        document_root=settings.STATIC_ADMINSORTABLE_ROOT,
-    )
+    + STATICFILES
     + [
         re_path(r"^", TemplateView.as_view(template_name="index.html"), name="index"),
     ]
