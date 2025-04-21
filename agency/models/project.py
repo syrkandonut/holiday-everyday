@@ -4,9 +4,9 @@ from django.db.models import (
     DateTimeField,
     ImageField,
     ManyToManyField,
-    TextField,
     URLField,
 )
+from tinymce.models import HTMLField
 
 from agency.common.validators.video import rutube_url_validator
 from agency.utils.img_converter import to_webp
@@ -67,7 +67,7 @@ class Project(Base):
         null=True,
         blank=True,
     )
-    full_description: TextField = TextField(
+    full_description: HTMLField = HTMLField(
         verbose_name="Полное описание проекта",
         null=True,
         blank=True,
