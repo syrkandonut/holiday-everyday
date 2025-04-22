@@ -15,6 +15,8 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 
+from .tinymce_conf import TINYMCE_DEFAULT_CONFIG  # noqa
+
 load_dotenv()
 
 SERVER_URI = os.getenv("SERVER_URI")
@@ -46,6 +48,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django_cleanup.apps.CleanupConfig",
     "adminsortable",
+    "tinymce",
     "corsheaders",
     "rest_framework",
     "agency",
@@ -159,15 +162,30 @@ STATIC_URL = "/static/"
 IMAGE_URL = "/image"
 STORAGE_IMAGE_PATH = "storage/images"
 
-STATIC_CONFIG = {
+FRONTEND_STATIC: dict[str, str] = {
     "favicon.svg": "static/favicon.svg",
     "/assets/": "static/assets",
     "/images/": "static/images",
     "/video/": "static/video",
-    "/static/adminsortable/": "static/adminsortable/static/adminsortable",
+}
+
+PACKAGE_STATIC: dict[str, str] = {
+    "/static/adminsortable/": "static/packages/adminsortable",
+    "/static/rest_framework/": "static/packages/rest_framework",
+    "/static/tinymce/tinymce.min.js": "static/packages/tinymce/tinymce.min.js",
+    "/static/django_tinymce/init_tinymce.js": "static/packages/tinymce/init_tinymce.js",
+}
+
+MEDIA_STATIC: dict[str, str] = {
     IMAGE_URL: STORAGE_IMAGE_PATH,
 }
 
+
+STATIC_CONFIG = {
+    **FRONTEND_STATIC,
+    **PACKAGE_STATIC,
+    **MEDIA_STATIC,
+}
 
 # Image resolution for the compression to webp
 IMG_BIG_SIZE = (4096, 2048)
