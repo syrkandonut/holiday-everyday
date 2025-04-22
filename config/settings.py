@@ -15,6 +15,8 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 
+from .tinymce_conf import TINYMCE_DEFAULT_CONFIG  # noqa
+
 load_dotenv()
 
 SERVER_URI = os.getenv("SERVER_URI")
@@ -160,15 +162,30 @@ STATIC_URL = "/static/"
 IMAGE_URL = "/image"
 STORAGE_IMAGE_PATH = "storage/images"
 
-STATIC_CONFIG = {
+FRONTEND_STATIC: dict[str, str] = {
     "favicon.svg": "static/favicon.svg",
     "/assets/": "static/assets",
     "/images/": "static/images",
     "/video/": "static/video",
-    "/static/adminsortable/": "static/adminsortable/static/adminsortable",
+}
+
+PACKAGE_STATIC: dict[str, str] = {
+    "/static/adminsortable/": "static/packages/adminsortable",
+    "/static/rest_framework/": "static/packages/rest_framework",
+    "/static/tinymce/tinymce.min.js": "static/packages/tinymce/tinymce.min.js",
+    "/static/django_tinymce/init_tinymce.js": "static/packages/tinymce/init_tinymce.js",
+}
+
+MEDIA_STATIC: dict[str, str] = {
     IMAGE_URL: STORAGE_IMAGE_PATH,
 }
 
+
+STATIC_CONFIG = {
+    **FRONTEND_STATIC,
+    **PACKAGE_STATIC,
+    **MEDIA_STATIC,
+}
 
 # Image resolution for the compression to webp
 IMG_BIG_SIZE = (4096, 2048)
@@ -178,40 +195,3 @@ IMG_SMALL_SIZE = (256, 144)
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-
-TINYMCE_DEFAULT_CONFIG = {
-    "entity_encoding": "raw",
-    "menubar": "",
-    "plugins": "autosave save code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists wordcount imagetools",
-    "toolbar": "fullscreen preview | undo redo | bold italic forecolor backcolor | formatselect | image link | "
-    "alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist checklist | fontsizeselect "
-    "emoticons | ",
-    "custom_undo_redo_levels": 50,
-    "quickbars_insert_toolbar": False,
-    "file_picker_callback": """function (cb, value, meta) {
-        var input = document.createElement("input");
-        input.setAttribute("type", "file");
-        if (meta.filetype == "image") {
-            input.setAttribute("accept", "image/*");
-        }
-        if (meta.filetype == "media") {
-            input.setAttribute("accept", "video/*");
-        }
-
-        input.onchange = function () {
-            var file = this.files[0];
-            var reader = new FileReader();
-            reader.onload = function () {
-                var id = "blobid" + (new Date()).getTime();
-                var blobCache = tinymce.activeEditor.editorUpload.blobCache;
-                var base64 = reader.result.split(",")[1];
-                var blobInfo = blobCache.create(id, file, base64);
-                blobCache.add(blobInfo);
-                cb(blobInfo.blobUri(), { title: file.name });
-            };
-            reader.readAsDataURL(file);
-        };
-        input.click();
-    }""",
-    "content_style": "body { font-family:Roboto,Helvetica,Arial,sans-serif; font-size:14px }",
-}
