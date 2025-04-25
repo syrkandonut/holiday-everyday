@@ -10,7 +10,7 @@ ENTITY_ENCODING: str = "raw"
 
 # Plugins
 PLUGINS: str = str(" ").join(
-    ["autosave", "save", "fullscreen", "image", "link", "wordcount", "imagetools"]
+    ["autosave", "save", "fullscreen", "image", "link", "wordcount"]
 )
 
 # Toolbar

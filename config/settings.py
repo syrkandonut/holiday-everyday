@@ -172,7 +172,7 @@ FRONTEND_STATIC: dict[str, str] = {
 PACKAGE_STATIC: dict[str, str] = {
     "/static/adminsortable/": "static/packages/adminsortable",
     "/static/rest_framework/": "static/packages/rest_framework",
-    "/static/tinymce/tinymce.min.js": "static/packages/tinymce/tinymce.min.js",
+    "/static/tinymce/": "static/packages/tinymce",
     "/static/django_tinymce/init_tinymce.js": "static/packages/tinymce/init_tinymce.js",
 }
 
