@@ -10,6 +10,7 @@ from config.settings import IMAGE_URL, SERVER_URI, STORAGE_IMAGE_PATH
 class ImageInLine(SortableTabularInline):
     model = Image
     extra = 0
+    classes = ["collapse"]
 
     fields = ["name", "get_thumbnail", "delete_button"]
     readonly_fields = ["get_thumbnail", "delete_button"]
