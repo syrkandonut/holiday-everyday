@@ -19,30 +19,23 @@ TOOLBAR: str = str(" | ").join(
 )
 
 # Style text formats. For example <p>, h1, h2, etc.
-STYLE_TITLE_H1: str = "Заголовок 1"
-STYLE_VALUE_H1: str = "h1"
-
-STYLE_TITLE_H2: str = "Заголовок 2"
-STYLE_VALUE_H2: str = "h2"
-
-STYLE_TITLE_H3: str = "Заголовок 3"
+STYLE_TITLE_H3: str = "Заголовок"
 STYLE_VALUE_H3: str = "h3"
+
+STYLE_TITLE_H4: str = "Подзаголовок"
+STYLE_VALUE_H4: str = "h4"
 
 STYLE_TITLE_P: str = "Обычный"
 STYLE_VALUE_P: str = "p"
 
 STYLE_FORMATS: list[dict[str, str]] = [
     {
-        "title": STYLE_TITLE_H1,
-        "format": STYLE_VALUE_H1,
-    },
-    {
-        "title": STYLE_TITLE_H2,
-        "format": STYLE_VALUE_H2,
-    },
-    {
         "title": STYLE_TITLE_H3,
         "format": STYLE_VALUE_H3,
+    },
+    {
+        "title": STYLE_TITLE_H4,
+        "format": STYLE_VALUE_H4,
     },
     {
         "title": STYLE_TITLE_P,
