@@ -1,3 +1,5 @@
+import re
+
 from django.db.models import (
     BooleanField,
     CharField,
@@ -118,3 +120,15 @@ class Project(Base):
 
     def __str__(self):
         return f"Проект {self.title}"
+
+    def save(self, *args, **kwargs):
+        self.full_description = self.remove_img_wrappers(self.full_description)
+        super().save(*args, **kwargs)
+
+    @staticmethod
+    def remove_img_wrappers(html_content):
+        pattern = r"<(p|h[1-4]|span|blockquote|b|i)>(\s*<img[^>]*>\s*)</\1>"
+
+        cleaned_content = re.sub(pattern, r"\2", html_content)
+
+        return cleaned_content
