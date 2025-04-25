@@ -15,7 +15,7 @@ PLUGINS: str = str(" ").join(
 
 # Toolbar
 TOOLBAR: str = str(" | ").join(
-    ["fullscreen", "undo redo", "styles", "bold italic", "link image"]
+    ["fullscreen", "undo redo", "styles", "blockquote", "link image"]
 )
 
 # Style text formats. For example <p>, h1, h2, etc.
