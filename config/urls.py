@@ -33,6 +33,7 @@ urlpatterns = (
         ),
         path("api/media", RedirectView.as_view(url="/api/media/", permanent=True)),
         path("api/tags", RedirectView.as_view(url="api/tags/", permanent=True)),
+        path("ckeditor5/", include("django_ckeditor_5.urls")),
     ]
     + STATICFILES
     + [

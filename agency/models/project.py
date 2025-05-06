@@ -1,4 +1,6 @@
+import os
 import re
+from urllib.parse import unquote
 
 from django.db.models import (
     BooleanField,
@@ -8,11 +10,14 @@ from django.db.models import (
     ManyToManyField,
     URLField,
 )
-from tinymce.models import HTMLField
+from django_ckeditor_5.fields import CKEditor5Field
 
 from agency.common.validators.video import rutube_url_validator
 from agency.utils.img_converter import to_webp
-from config.settings import STORAGE_IMAGE_PATH
+from config.settings import (
+    STORAGE_CKEDITOR_IMAGE_PATH,
+    STORAGE_IMAGE_PATH,
+)
 
 from .base import Base
 from .tag import Tag
@@ -69,7 +74,7 @@ class Project(Base):
         null=True,
         blank=True,
     )
-    full_description: HTMLField = HTMLField(
+    full_description: CKEditor5Field = CKEditor5Field(
         verbose_name="Полное описание проекта",
         null=True,
         blank=True,
@@ -116,19 +121,46 @@ class Project(Base):
         if self.preview_image:
             to_webp(self.preview_image)
 
+        if self.full_description:
+            self.check_file_system_image_matches()
+
         super().save(*args, **kwargs)
+
+    def check_file_system_image_matches(
+        self, exclude_files: list[str] = [".gitignore"]
+    ):
+        images: list[str] = list()
+
+        for proj in Project.objects.all():
+            if Project.full_description:
+                image = self.get_image_from_full_description(
+                    full_description=proj.full_description
+                )
+                images.extend(image) if image else ...
+
+        images.extend(
+            self.get_image_from_full_description(full_description=self.full_description)
+        )
+
+        if not images:
+            for file in os.listdir(STORAGE_CKEDITOR_IMAGE_PATH):
+                if file not in exclude_files:
+                    return os.unlink(os.path.join(STORAGE_CKEDITOR_IMAGE_PATH, file))
+
+        for file in os.listdir(STORAGE_CKEDITOR_IMAGE_PATH):
+            file_path = os.path.join(STORAGE_CKEDITOR_IMAGE_PATH, file)
+            if file not in images:
+                try:
+                    if file not in exclude_files:
+                        os.unlink(file_path)
+                except FileNotFoundError:
+                    pass
+
+    @staticmethod
+    def get_image_from_full_description(full_description: str) -> list:
+        pattern = r'src=["\'][^"\']*/([^/"\']+)["\']'
+
+        return re.findall(pattern, unquote(full_description))
 
     def __str__(self):
         return f"Проект {self.title}"
-
-    def save(self, *args, **kwargs):
-        self.full_description = self.remove_img_wrappers(self.full_description)
-        super().save(*args, **kwargs)
-
-    @staticmethod
-    def remove_img_wrappers(html_content):
-        pattern = r"<(p|h[1-4]|span|blockquote|b|i)>(\s*<img[^>]*>\s*)</\1>"
-
-        cleaned_content = re.sub(pattern, r"\2", html_content)
-
-        return cleaned_content
