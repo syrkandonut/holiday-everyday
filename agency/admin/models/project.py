@@ -4,20 +4,24 @@ from django.db.models import ManyToManyField
 from django.forms import CheckboxSelectMultiple
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import path, reverse
-from django.utils.html import format_html
 
 from agency.admin.inlines import ImageInLine
 from agency.forms import ProjectMultipleFileForm
-from agency.models import Image
-from agency.models.project import Project
+from agency.models import Image, Project
+from agency.utils.as_html import (
+    HTMLColor,
+    html_get_button,
+    html_get_preview_with_thumbnail,
+    html_get_preview_without_thumbnail,
+)
 from config.settings import IMAGE_URL, SERVER_URI, STORAGE_IMAGE_PATH
 
 
 class ProjectAdmin(SortableAdmin):
     inlines = [ImageInLine]
     form = ProjectMultipleFileForm
-    list_display = ("title", "get_thumbnail", "publish_button")
-    readonly_fields = ["get_thumbnail", "delete_all_images_button"]
+    list_display = ("title", "get_preview", "publish_button")
+    readonly_fields = ["get_preview", "delete_all_images_button"]
     formfield_overrides = {
         ManyToManyField: {"widget": CheckboxSelectMultiple},
     }
@@ -30,15 +34,16 @@ class ProjectAdmin(SortableAdmin):
 
         if obj.published:
             button_text = "Снять с публикации"
-            button_color = "grey"
+            button_color = HTMLColor.GREY
         else:
             button_text = "Опубликовать"
-            button_color = "green"
-        return format_html(
-            '<a class="button" href="{}" style="background-color: {};">{}</a>',
-            reverse("admin:agency_toggle_publish", args=[obj.pk]),
-            button_color,
-            button_text,
+            button_color = HTMLColor.GREEN
+
+        return html_get_button(
+            button_color=button_color,
+            button_text=button_text,
+            text_color=HTMLColor.WHITE,
+            source_url=reverse("admin:agency_toggle_publish", args=[obj.pk]),
         )
 
     def toggle_publish(self, request, project_id):
@@ -81,41 +86,36 @@ class ProjectAdmin(SortableAdmin):
         self.message_user(request, f"Все картинки проекта {project.title} удалены.")
         return redirect(reverse("admin:agency_project_change", args=[project_id]))
 
-    def get_thumbnail(self, obj):
+    def get_preview(self, obj):
         if obj.preview_image:
             image_url = (
                 f"{SERVER_URI}{IMAGE_URL}"
                 + f"{obj.preview_image.name.replace(STORAGE_IMAGE_PATH, str())}"
             )
-            return format_html(
-                '<a href="{}/portfolio/{}/" target="_blank"><img src="{}" '
-                'style="width: 100px; height: auto;" /></a>',
-                SERVER_URI,
-                obj.id,
-                image_url,
+            return html_get_preview_with_thumbnail(
+                project_id=obj.id,
+                image_url=image_url,
             )
 
         if obj.title is None:
             return "Недоступен, добавьте заголовок проекта"
 
         if obj:
-            return format_html(
-                f'<a href="{SERVER_URI}/portfolio/{{}}/" target="_blank">{{}}</a>',
-                obj.id,
-                "<Без превью>",
+            return html_get_preview_without_thumbnail(
+                project_id=obj.id, warning_text="<Без превью>"
             )
 
         return str()
 
     def delete_all_images_button(self, obj):
-        return format_html(
-            '<a class="button" href="{}"'
-            'style="background-color: #ba2120; color: white;">'
-            "Удалить все картинки</a>",
-            reverse("admin:agency_delete_all_images", args=[obj.pk]),
+        return html_get_button(
+            button_color=HTMLColor.RED,
+            text_color=HTMLColor.WHITE,
+            button_text="Удалить все картинки",
+            source_url=reverse("admin:agency_delete_all_images", args=[obj.pk]),
         )
 
-    get_thumbnail.short_description = "Предпросмотр"  # type: ignore
+    get_preview.short_description = "Предпросмотр"  # type: ignore
     delete_all_images_button.short_description = "Удалить картинки"  # type: ignore
 
     def save_related(self, request, form, formsets, change):

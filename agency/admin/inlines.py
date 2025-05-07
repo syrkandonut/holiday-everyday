@@ -1,9 +1,9 @@
 from adminsortable.admin import SortableTabularInline  # type: ignore
 from django.contrib.admin import StackedInline
 from django.urls import reverse
-from django.utils.html import format_html
 
 from agency.models import Image, Review
+from agency.utils.as_html import HTMLColor, html_get_button, html_get_thumbnail
 from config.settings import IMAGE_URL, SERVER_URI, STORAGE_IMAGE_PATH
 
 
@@ -24,18 +24,16 @@ class ImageInLine(SortableTabularInline):
                 f"{SERVER_URI}{IMAGE_URL}"
                 + f"{obj.name.name.replace(STORAGE_IMAGE_PATH, str())}"
             )
-            return format_html(
-                '<img src="{}" style="width: 100px; height: auto;" />', image_url
-            )
+            return html_get_thumbnail(image_url)
 
         return str()
 
     def delete_button(self, obj):
-        return format_html(
-            '<a class="button" href="{}" '
-            'style="background-color: #ba2121; color: white;"'
-            ">Удалить</a>",
-            reverse("admin:agency_delete_image", args=[obj.pk]),
+        return html_get_button(
+            button_color=HTMLColor.RED,
+            button_text="Удалить",
+            text_color=HTMLColor.WHITE,
+            source_url=reverse("admin:agency_delete_image", args=[obj.pk]),
         )
 
     # def has_add_permission(self, request, obj=None):
