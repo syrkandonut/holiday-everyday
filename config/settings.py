@@ -168,41 +168,32 @@ STATIC_URL = "/static/"
 IMAGE_URL = "/image/"
 STORAGE_IMAGE_PATH = "storage/images"
 
-FRONTEND_STATIC: dict[str, str] = {
+FRONTEND_STATIC = {
     "favicon.svg": "static/favicon.svg",
     "/assets/": "static/assets",
     "/images/": "static/images",
     "/video/": "static/video",
 }
 
-PACKAGE_STATIC: dict[str, str] = {
+PACKAGE_STATIC = {
     "/static/adminsortable/": "static/packages/adminsortable",
     "/static/rest_framework/": "static/packages/rest_framework",
     "/static/django_ckeditor_5/": "static/packages/django_ckeditor_5",
 }
 
-MEDIA_STATIC: dict[str, str] = {
+MEDIA_STATIC = {
     IMAGE_URL: STORAGE_IMAGE_PATH,
 }
 
-DJANGO_CKEDITOR_5_PATH: str = "django_ckeditor_5"
-STORAGE_CKEDITOR_IMAGE_PATH: str = f"{STORAGE_IMAGE_PATH}/{DJANGO_CKEDITOR_5_PATH}"
-IMAGE_CKEDITOR_URL: str = f"/{STORAGE_IMAGE_PATH}/{DJANGO_CKEDITOR_5_PATH}/"
+# CKEditor Settings
+# https://ckeditor.com/docs/ckeditor5/latest/index.html
+DJANGO_CKEDITOR_5_PATH = "django_ckeditor_5"
+STORAGE_CKEDITOR_IMAGE_PATH = f"{STORAGE_IMAGE_PATH}/{DJANGO_CKEDITOR_5_PATH}"
+IMAGE_CKEDITOR_URL = f"/{STORAGE_IMAGE_PATH}/{DJANGO_CKEDITOR_5_PATH}/"
 
-MEDIA_CKEDITOR_STATIC: dict[str, str] = {
+MEDIA_CKEDITOR_STATIC = {
     IMAGE_CKEDITOR_URL: STORAGE_CKEDITOR_IMAGE_PATH,
 }
-
-STATIC_CONFIG = {
-    **FRONTEND_STATIC,
-    **PACKAGE_STATIC,
-    **MEDIA_STATIC,
-    **MEDIA_CKEDITOR_STATIC,
-}
-
-# Image resolution for the compression to webp
-IMG_BIG_SIZE = (4096, 2048)
-IMG_SMALL_SIZE = (256, 144)
 
 
 class CKEditorStorage(FileSystemStorage):
@@ -213,6 +204,19 @@ class CKEditorStorage(FileSystemStorage):
 
 
 CKEDITOR_5_FILE_STORAGE = "config.settings.CKEditorStorage"
+
+
+# All static config
+STATIC_CONFIG = {
+    **FRONTEND_STATIC,
+    **PACKAGE_STATIC,
+    **MEDIA_STATIC,
+    **MEDIA_CKEDITOR_STATIC,
+}
+
+# Image resolution for the compression to webp
+IMG_BIG_SIZE = (4096, 2048)
+IMG_SMALL_SIZE = (256, 144)
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
