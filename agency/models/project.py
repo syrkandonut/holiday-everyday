@@ -15,6 +15,7 @@ from django_ckeditor_5.fields import CKEditor5Field
 from agency.common.validators.video import rutube_url_validator
 from agency.utils.img_converter import to_webp
 from config.settings import (
+    SERVER_URI,
     STORAGE_CKEDITOR_IMAGE_PATH,
     STORAGE_IMAGE_PATH,
 )
@@ -123,6 +124,7 @@ class Project(Base):
 
         if self.full_description:
             self.check_file_system_image_matches()
+            self.reformat_full_description(self.full_description)
 
         super().save(*args, **kwargs)
 
@@ -155,6 +157,15 @@ class Project(Base):
                         os.unlink(file_path)
                 except FileNotFoundError:
                     pass
+
+    def reformat_full_description(self, full_description: str) -> None:
+        pattern = (
+            r'<img([^>]*)style="[^"]*"([^>]*)'
+            + r'src="([^"]*)"([^>]*)width="[^"]*"([^>]*)'
+            + r'height="[^"]*"([^>]*)>'
+        )
+        replacement = r'<img\1\2src="{}\3"\4\5\6>'.format(SERVER_URI)
+        self.full_description = re.sub(pattern, replacement, full_description)
 
     @staticmethod
     def get_image_from_full_description(full_description: str) -> list:

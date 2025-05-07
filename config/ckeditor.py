@@ -1,5 +1,8 @@
 _CKEDITOR_REMOVE_PLUGINS: dict[str, list[str]] = {
-    "removePlugins": ["MediaEmbedToolbar", "ImageToolbar", "figure"]
+    "removePlugins": [
+        "MediaEmbedToolbar",
+        "ImageToolbar",
+    ]
 }
 
 _CKEDITOR_TOOLBAR: dict[str, dict[str, list[str]]] = {
@@ -14,14 +17,14 @@ _CKEDITOR_HEADING: dict[str, dict[str, list[dict[str, str]]]] = {
                 "class": "ck-heading_paragraph",
             },
             {
-                "model": "heading1",
-                "view": "h1",
+                "model": "heading3",
+                "view": "h3",
                 "title": "Заголовок",
                 "class": "ck-heading_heading1",
             },
             {
-                "model": "heading2",
-                "view": "h2",
+                "model": "heading4",
+                "view": "h4",
                 "title": "Подзаголовок",
                 "class": "ck-heading_heading2",
             },
