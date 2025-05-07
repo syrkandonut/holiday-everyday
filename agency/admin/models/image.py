@@ -1,6 +1,6 @@
 from django.contrib import admin
-from django.utils.html import format_html
 
+from agency.utils.as_html import html_get_thumbnail
 from config.settings import IMAGE_URL, SERVER_URI, STORAGE_IMAGE_PATH
 
 # Deprecated 07.02.2025 according to the requirements
@@ -21,9 +21,7 @@ class ImageAdmin(admin.ModelAdmin):
                 f"{SERVER_URI}{IMAGE_URL}"
                 + f"{obj.name.name.replace(STORAGE_IMAGE_PATH, str())}"
             )
-            return format_html(
-                '<img src="{}" style="width: 100px; height: auto;" />', image_url
-            )
+            return html_get_thumbnail(image_url)
 
         return str()
 

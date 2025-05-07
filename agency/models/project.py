@@ -98,6 +98,13 @@ class Project(Base):
         auto_now_add=True,
     )
 
+    class Meta:
+        db_table = "projects"
+        ordering = ["-created_at"]
+
+        verbose_name = "Проект"
+        verbose_name_plural = "Проекты"
+
     def publish(self):
         self.is_published = True
         self.save()
@@ -106,18 +113,11 @@ class Project(Base):
         self.is_published = False
         self.save()
 
-    class Meta:
-        db_table = "projects"
-        ordering = ["-created_at"]
-
-        verbose_name = "Проект"
-        verbose_name_plural = "Проекты"
-
     def save(self, *args, **kwargs):
         if self.video:
             share_postfix = "r=plwd"
             self.video = self.video.replace("?" + share_postfix, str())
-            self.video = self.video.replace("r=plwd", str())
+            self.video = self.video.replace(share_postfix, str())
 
         if self.preview_image:
             to_webp(self.preview_image)
