@@ -11,7 +11,6 @@ The main purpose of the application is to create a portfolio of events on the pa
 
 # Admin panel
 The Django admin panel is implemented with all the customer's requirements. Technologies such as:
-Image compression 
-Adminsortable sorting using JS using drug'n'drop technology
-CKEditor is a docs editor that implements the HTML structure
-and more.
+* Image compression 
+* Adminsortable sorting using JS using drug'n'drop technology
+* CKEditor is a docs editor that implements the HTML structure and more.
