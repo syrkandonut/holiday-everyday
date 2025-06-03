@@ -22,6 +22,14 @@ from .ckeditor import (  # noqa
     CKEDITOR_5_FILE_UPLOAD_PERMISSION,
     CKEDITOR_5_UPLOAD_FILE_TYPES,
 )
+from .email import (  # noqa
+    EMAIL_HOST,
+    EMAIL_HOST_PASSWORD,
+    EMAIL_HOST_USER,
+    EMAIL_PORT,
+    EMAIL_USE_SSL,
+    EMAIL_USE_TLS,
+)
 
 load_dotenv()
 
@@ -103,9 +111,9 @@ TEMPLATES = [
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://*.mydomain.com",
     "http://localhost:8000",
-    "http://localhost:1234",
+    "http://localhost:8001",
+    "https://u2994719.isp.regruhosting.ru/",
 ]
 
 WSGI_APPLICATION = "config.wsgi.application"
