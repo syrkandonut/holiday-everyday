@@ -13,7 +13,7 @@ from django.db.models import (
 from django_ckeditor_5.fields import CKEditor5Field
 
 from agency.common.validators.video import rutube_url_validator
-from agency.utils.img_converter import to_webp
+from agency.utils.img_converter import to_webp_and_thumbnail
 from config.settings import (
     SERVER_URI,
     STORAGE_CKEDITOR_IMAGE_PATH,
@@ -120,7 +120,7 @@ class Project(Base):
             self.video = self.video.replace(share_postfix, str())
 
         if self.preview_image:
-            to_webp(self.preview_image)
+            to_webp_and_thumbnail(self.preview_image)
 
         if self.full_description:
             self.check_file_system_image_matches()
