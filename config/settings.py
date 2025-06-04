@@ -22,14 +22,6 @@ from .ckeditor import (  # noqa
     CKEDITOR_5_FILE_UPLOAD_PERMISSION,
     CKEDITOR_5_UPLOAD_FILE_TYPES,
 )
-from .email import (  # noqa
-    EMAIL_HOST,
-    EMAIL_HOST_PASSWORD,
-    EMAIL_HOST_USER,
-    EMAIL_PORT,
-    EMAIL_USE_SSL,
-    EMAIL_USE_TLS,
-)
 
 load_dotenv()
 
@@ -221,6 +213,15 @@ STATIC_CONFIG = {
     **MEDIA_STATIC,
     **MEDIA_CKEDITOR_STATIC,
 }
+
+EMAIL_HOST = os.getenv("EMAIL_HOST")
+EMAIL_PORT = os.getenv("EMAIL_PORT")
+
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
+
+EMAIL_USE_TLS = False
+EMAIL_USE_SSL = True
 
 # Image resolution for the compression to webp
 IMG_BIG_SIZE = (4096, 2048)
