@@ -43,6 +43,4 @@ class EmailView(APIView):
         return f"Номер телефона: {phone}\nОписание проекта: {text}"
 
     def _get_msg_title_by_name(self, name: str) -> str:
-        f_name = {str(name).title()}
-
-        return f'Обратная связь сайта {EMAIL_TARGET} от пользователя "{f_name}".'
+        return f'Обратная связь сайта {EMAIL_TARGET} от пользователя "{name.title()}".'
