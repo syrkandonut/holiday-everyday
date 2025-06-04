@@ -9,6 +9,8 @@ from config.settings import EMAIL_HOST_USER as EMAIL_TARGET
 
 
 class EmailView(APIView):
+    authentication_classes = ()
+    
     def post(self, request: Request):
         serializer = EmailDataSerializer(data=request.data)
 
