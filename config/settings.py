@@ -39,6 +39,27 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = eval(os.getenv("DEBUG"))
+DEBUG_PROPAGATE_EXCEPTIONS = eval(os.getenv("DEBUG_PROPAGATE_EXCEPTIONS"))
+
+if DEBUG_PROPAGATE_EXCEPTIONS:
+    LOGGING = {
+        'version': 1,
+        'disable_existing_loggers': False,
+        'handlers': {
+            'file': {
+                'level': 'ERROR',
+                'class': 'logging.FileHandler',
+                'filename': 'logs/django_errors.log',  # Куда писать логи
+            },
+        },
+        'loggers': {
+            'django': {
+                'handlers': ['file'],  # Использует обработчик 'file'
+                'level': 'ERROR',      # Логирует только ERROR и выше
+                'propagate': True,     # Передаёт ошибки родительским логгерам
+            },
+        },
+    }
 
 ALLOWED_HOSTS: list[str] = ["*"]
 
