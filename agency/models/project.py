@@ -159,13 +159,24 @@ class Project(Base):
                     pass
 
     def reformat_full_description(self, full_description: str) -> None:
-        pattern = (
+        image_pattern = (
             r'<img([^>]*)style="[^"]*"([^>]*)'
             + r'src="([^"]*)"([^>]*)width="[^"]*"([^>]*)'
             + r'height="[^"]*"([^>]*)>'
         )
-        replacement = r'<img\1\2src="{}\3"\4\5\6>'.format(SERVER_URI)
-        self.full_description = re.sub(pattern, replacement, full_description)
+
+        image_replacement = r'<img\1\2src="{}\3"\4\5\6>'.format(SERVER_URI)
+
+        empty_pattern = r"<p>&nbsp;</p>"
+        empty_replacement = ""
+
+        self.full_description = re.sub(
+            image_pattern, image_replacement, full_description
+        )
+        self.full_description = re.sub(
+            empty_pattern, empty_replacement, full_description
+        )
+        self.full_description = unquote(str(self.full_description))
 
     @staticmethod
     def get_image_from_full_description(full_description: str) -> list:
