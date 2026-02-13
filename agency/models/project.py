@@ -2,14 +2,18 @@ import os
 import re
 from urllib.parse import unquote
 
+from adminsortable.admin import SortableMixin  # type: ignore
 from django.db.models import (
     BooleanField,
     CharField,
     DateTimeField,
     ImageField,
     ManyToManyField,
+    IntegerField,
     URLField,
+    Min,
 )
+from django.db import transaction
 from django_ckeditor_5.fields import CKEditor5Field
 
 from agency.common.validators.video import rutube_url_validator
@@ -30,7 +34,7 @@ PROJECT_TYPES = (
 )
 
 
-class Project(Base):
+class Project(Base, SortableMixin):
     preview_image: ImageField = ImageField(
         upload_to=STORAGE_IMAGE_PATH,
         verbose_name="Превью проекта",
@@ -97,10 +101,11 @@ class Project(Base):
         verbose_name="Дата и время создания",
         auto_now_add=True,
     )
+    order: IntegerField = IntegerField(default=0, db_index=True)
 
     class Meta:
         db_table = "projects"
-        ordering = ["-created_at"]
+        ordering = ["-order"]
 
         verbose_name = "Проект"
         verbose_name_plural = "Проекты"
